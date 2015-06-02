@@ -112,5 +112,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-PATH=:.$HOME/BaseStack/bin:$PATH
+PATH=:.:$HOME/BaseStack/bin:$PATH
 source alias.sh
