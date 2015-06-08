@@ -1,5 +1,9 @@
+#!/bin/bash
+# Assumes that git is installed and have cloned the BaseStack repo
 chmod +x $HOME/BaseStack/bin/*.sh
-cp $HOME/BaseStack/bin/.bashrc $HOME
-cp $HOME/BaseStack/bin/.vimrc $HOME
-chmod +x $HOME/.vimrc
-chmod +x $HOME/.bashrc
+chmod +x $HOME/BaseStack/install_scripts/*.sh
+# Install curl
+sudo apt-get install curl
+# Do other basic setups
+bash install_scripts/basic_setup.sh
+# Install chef
