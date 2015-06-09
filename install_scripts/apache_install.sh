@@ -4,7 +4,7 @@ sudo apt-get install -y apache2
 
 # Handle the case of running without vagrant
 if ! [ -L /vagrant ]; then
-  mkdir apache_home
+  mkdir $HOME/apache_home
   sudo ln -s $HOME/apache_home /vagrant
 fi
 
