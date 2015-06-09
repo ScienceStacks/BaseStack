@@ -7,3 +7,6 @@ sudo apt-get install curl
 # Do other basic setups
 bash install_scripts/basic_setup.sh
 # Install chef
+bash install_scripts/chef_install.sh
+# Apache
+bash install_scripts/apache_install.sh

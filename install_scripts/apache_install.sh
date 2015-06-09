@@ -1,6 +1,6 @@
 #!/bin/bash
 # Installs Apache so that the server runs from
-apt-get install -y apache2
+sudo apt-get install -y apache2
 
 # Handle the case of running without vagrant
 if ! [ -L /vagrant ]; then
@@ -10,6 +10,6 @@ fi
 
 # Set up the link for running  apache
 if ! [ -L /var/www/html ]; then
-  rm -rf /var/www
-  ln -fs /vagrant /var/www
+  sudo rm -rf /var/www
+  sudo ln -fs /vagrant /var/www
 fi
