@@ -6,6 +6,25 @@ from fabric.operations import put, run
 env.user = 'ubuntu'
 env.hosts = ['localhost']
 
+def setup():
+  # Invokes all setups to do
+  install_tools()
+  setup_env()
+  setup_apache()
+
+def setup_apache():
+  #sudo("apt-get install -y apache2", pty=True)
+  if not exists("/vagrant"):
+    mkdir_local("$HOME/apache_home", isSudo=False)
+    mkdir_local("$HOME/apache_home/html", isSudo=False)
+    command = 'echo "Hello ubuntu World!" > '
+    command += '$HOME/apache_home/html/index.html'
+    do_commands([command], isSudo=False)
+    ln_local("-s","$HOME/apache_home", "/vagrant", isSudo=False)
+    sudo("ln -s $HOME/apache_home /vagrant")
+  sudo("rm -rf /var/www", pty=True)
+  sudo ("ln -fs /vagrant /var/www")
+
 def setup_env():
   cp_local('$HOME/BaseStack/bin/.bashrc', '$HOME', isSudo=False)
   chmod_local('+x', '.bashrc', isSudo=True)
@@ -43,7 +62,6 @@ def do_commands(commands, isSudo=False):
   # Input: commands - list of commands
   #        isSudo - command should be run using sudo
   for cmd in commands:
-    print "cmd = %s" % cmd
     if cmd.strip():  # Must be a string with non-blanks
       if isSudo:
         try: 
@@ -52,7 +70,8 @@ def do_commands(commands, isSudo=False):
           print e
       else:
         try: 
-          local(cmd, capture=True)
+          print "[local] %s" % cmd
+          local(cmd)
         except Exception as e:
           print e
 
@@ -69,6 +88,16 @@ def chown_local(path, new_owner):
 def chmod_local(mode, path, isSudo=False):
   command = "chmod %s %s" % (mode, path)
   do_commands([command], isSudo=isSudo)
+
+def ln_local(target, link, options, isSudo=False):
+  if not exists(link):
+    command = "ln -%s %s %s" % (options, target, link)
+    do_commands([command], isSudo=isSudo)
+
+def mkdir_local(path, isSudo=False):
+  if not exists(path):
+    command = "mkdir %s" % path
+    do_commands([command], isSudo=isSudo)
 
 def sync_config():
     local('rsync -av . %s@%s:/etc/chef' % (env.user, env.hosts[0]))

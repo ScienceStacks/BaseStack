@@ -3,6 +3,5 @@
 # Install fabric
 sudo apt-get install fabric
 sudo apt-get install ssh
-cd $HOME/BaseStack/install_scripts
-fab install_tools
-fab setup_env  # After tools install to make sure get correct runfiles
+cd $HOME/BaseStack
+fab setup
