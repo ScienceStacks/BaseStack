@@ -1,5 +1,5 @@
 from fabric.context_managers import cd
-from fabric_solo import apt_get, chmod, cp, exists, ln
+from fabric_solo import apt_get, chmod, chown, cp, exists, ln
 from fabric_solo import mkdir, mv, rm, runall, wget
 
 def setup(git_email="jlheller@uw.edu", git_username="Joseph Hellerstein"):
@@ -20,11 +20,14 @@ def setup_apache():
   runall(["rm -rf /var/www"], isSudo=True)
   runall(["ln -fs /vagrant /var/www"], isSudo=True)
 
+def copy_file_in_bin_to_HOME(filename):
+  cp('$HOME/BaseStack/bin/%s' % filename, '$HOME', isSudo=True)
+  chmod('+x', filename, isSudo=True)
+  chown(filename)
+
 def setup_env(git_email, git_username):
-  cp('$HOME/BaseStack/bin/.bashrc', '$HOME', isSudo=False)
-  chmod('+x', '.bashrc', isSudo=True)
-  cp('$HOME/BaseStack/bin/.vimrc', '$HOME', isSudo=False)
-  chmod('+x', '.vimrc', isSudo=True)
+  copy_file_in_bin_to_HOME(".bashrc")
+  copy_file_in_bin_to_HOME(".vimrc")
   # Git configuration
   commands = '''
     git config --global user.email "%s"

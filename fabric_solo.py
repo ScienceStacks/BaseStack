@@ -42,7 +42,7 @@ def cp(from_path, to_path, isSudo=False):
   if not isSudo:
     runall([command])
 
-def chown(path, new_owner):
+def chown(path, new_owner=env.user):
   # Changes the owner for the file path
   command = 'chown -R %s:%s %s' % (new_owner, new_owner, path)
   runall([command], isSudo=True)
