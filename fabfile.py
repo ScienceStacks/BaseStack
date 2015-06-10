@@ -12,7 +12,7 @@ def setup(git_email="jlheller@uw.edu", git_username="Joseph Hellerstein"):
   setup_apache()
 
 def setup_apache():
-  #sudo("apt-get install -y apache2", pty=True)
+  sudo("apt-get install -y apache2", pty=True)
   if not exists("/vagrant"):
     mkdir("$HOME/apache_home", isSudo=False)
     mkdir("$HOME/apache_home/html", isSudo=False)
