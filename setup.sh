@@ -1,8 +1,8 @@
 #!/bin/bash
 # Assumes that git is installed and have cloned the BaseStack repo
-chmod +x $HOME/BaseStack/bin/*.sh
-chmod +x $HOME/BaseStack/install_scripts/*.sh
-# Install curl
-sudo apt-get install curl
-# Do other basic setups
-bash install_scripts/basic_setup.sh
+# Install fabric
+sudo apt-get install fabric
+sudo apt-get install ssh
+cd $HOME/BaseStack/install_scripts
+fab install_tools
+fab setup_env  # After tools install to make sure get correct runfiles
