@@ -1,6 +1,7 @@
 # Functions used when using fabric on a single machine
 
-from fabric.api import env, local, sudo
+from fabric.api import env, local, settings, sudo
+from fabric.contrib.files import sed
 import fabric.contrib.files as fcf
 from fabric.context_managers import cd
 
@@ -74,6 +75,10 @@ def mv(from_path, to_path, isSudo=False):
 def apt_get(args, isSudo=False):
   command = "apt-get install %s" % args
   runall([command], isSudo=isSudo)
+
+def sed(path, src_string, rpl_string):
+  with settings(host_string="localhost"):
+    fcf.sed(path, src_string, rpl_string)
 
 def wget(url):
   command = "wget '{}'".format(url)
