@@ -1,7 +1,7 @@
 # BaseStack
 This repo creates a basic software stack on a clean VM. The stack
 includes:
-  vim, git, git, pip, curl, apache
+  vim, git, pip, curl, apache
 There is also a capability to install chef (although some configuration
 is still required).
 
