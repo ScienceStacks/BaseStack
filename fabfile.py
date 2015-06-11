@@ -8,6 +8,14 @@ def setup(git_email="jlheller@uw.edu", git_username="Joseph Hellerstein"):
   setup_env(git_email, git_username)
   setup_apache()
 
+def setup_django():
+  apt_get("sqlite")
+  commands = '''
+    pip install django
+    django-admin startproject mysite
+  '''
+  runall(commands.splite('\n'), isSudo=True)
+
 def setup_apache():
   apt_get("-y apache2", isSudo=True)
   if not exists("/vagrant"):
