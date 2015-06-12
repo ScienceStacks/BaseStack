@@ -5,10 +5,9 @@ from fabric_solo import (apt_get, chmod, chown, cp, exists, ln,
 def setup(git_email="jlheller@uw.edu", 
     git_username="Joseph Hellerstein"):
   # Invokes all setups to do
-  sed("t.x", "f", "ggggg")
-  return
   install_tools()
   setup_env(git_email, git_username)
+  setup_py()
   setup_apache()
 
 def setup_django():
@@ -45,6 +44,12 @@ def setup_env(git_email, git_username):
     git config --global user.email "%s"
     git config --global user.name "%s"
   ''' % (git_email, git_username)
+  runall(commands.split('\n'), isSudo=False)
+
+def setup_py():
+  commands = '''
+    easy_install mock
+  '''
   runall(commands.split('\n'), isSudo=False)
 
 def install_chef():
