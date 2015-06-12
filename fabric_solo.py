@@ -4,12 +4,13 @@ from fabric.api import env, local, settings, sudo
 from fabric.contrib.files import sed
 import fabric.contrib.files as fcf
 from fabric.context_managers import cd
+from random import random
 
 env.user = 'ubuntu'
 env.hosts = ['localhost']
 
-DEBUG = False # Default value is true
-DEBUG_EXISTS_OUTPUT = False  # Value returned by exists
+print_only = False  # Print commands but do not execute them
+TEST_EXISTS_OUTPUT = False  # Value returned by exists
 
 def runall(commands, isSudo=False):
   # Run sudo on a list of commands
@@ -19,7 +20,7 @@ def runall(commands, isSudo=False):
     if cmd.strip():  # Must be a string with non-blanks
       if isSudo:
         try:
-          if not DEBUG:
+          if not print_only:
             sudo(cmd, pty=True)
           else:
             print "[sudo debug] %s" % cmd
@@ -27,7 +28,7 @@ def runall(commands, isSudo=False):
           print e
       else:
         try: 
-          if not DEBUG:
+          if not print_only:
             print "[local] %s" % cmd
             local(cmd, env.user)
           else:
@@ -76,16 +77,26 @@ def apt_get(args, isSudo=False):
   command = "apt-get install %s" % args
   runall([command], isSudo=isSudo)
 
-def sed(path, src_string, rpl_string):
-  with settings(host_string="localhost"):
-    fcf.sed(path, src_string, rpl_string)
+def random_integer(size):
+  return int(10**size*random())
+
+def sed(path, src_string, rpl_string, isSudo=False):
+#  with settings(host_string="localhost"):
+#    fcf.sed(path, src_string, rpl_string)
+  tmp_path = "/tmp/%d" % random_integer(10)
+  commands =  '''
+    sed 's/%s/%s/' %s > %s
+    mv %s %s
+  '''  % (src_string, rpl_string, path, tmp_path,
+          tmp_path, path)
+  runall(commands.split('\n'), isSudo=isSudo)
 
 def wget(url):
   command = "wget '{}'".format(url)
   runall([command], isSudo=isSudo)
 
 def exists(path):
-  if not DEBUG:
+  if not print_only:
     return fcf.exists(path)
   else:
-    return DEBUG_EXISTS_OUTPUT
+    return TEST_EXISTS_OUTPUT
