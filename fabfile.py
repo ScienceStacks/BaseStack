@@ -1,3 +1,6 @@
+'''Codes for creating a basic scientific statck on a linux VM'''
+
+
 from fabric.context_managers import cd
 from fabric_solo import (apt_get, chmod, chown, cp, exists, ln,
     mkdir, mv, rm, runall, sed, wget)
@@ -17,7 +20,7 @@ def setup_django():
     django-admin startproject mysite
   '''
   runall(commands.splite('\n'), isSudo=True)
-  # MOdify settings to select the engine and name
+  # Modify settings to select the engine and name
 
 def setup_apache():
   apt_get("-y apache2", isSudo=True)
