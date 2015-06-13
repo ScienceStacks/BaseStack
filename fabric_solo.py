@@ -1,12 +1,22 @@
-# Functions used when using fabric on a single machine
+'''
+  Functions used when using fabric on a single machine
+  Naming conventions for wrappers
+  Functions have the same name as their bash counterpart
+  Variables
+    kwargs - optional arguments for running the command (isSudo)
+    mode - file mode
+    options - command line options
+    path, from_path, to_path  - a file/directory path
+    src_string, rpl_strings - strings in a replacement operation
+    url - string for a URL
+'''
 
-from fabric.api import env, local, settings, sudo
-from fabric.contrib.files import sed
+from fabric.api import env, local, sudo
 import fabric.contrib.files as fcf
-from fabric.context_managers import cd
 from random import random
 
-env.user = 'ubuntu'
+DEFAULT_USER = 'ubuntu'
+env.user = DEFAULT_USER
 env.hosts = ['localhost']
 
 print_only = False  # Print commands but do not execute them
@@ -73,13 +83,15 @@ def cp(from_path, to_path, **kwargs):
 
 def exists(path):
   if print_only:
+    print "[debug local] exists %s" % path
     return TEST_EXISTS_OUTPUT
-  else:
+  else: 
+    print "[local] exists %s" % path
     return fcf.exists(path)
 
-def ln(options, target, link, **kwargs):
+def ln(options, path, link, **kwargs):
   if not exists(link):
-    command = "ln -%s %s %s" % (options, target, link)
+    command = "ln -%s %s %s" % (options, path, link)
     runall([command], **kwargs)
 
 def mkdir(path, **kwargs):
