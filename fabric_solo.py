@@ -19,7 +19,7 @@ DEFAULT_USER = 'ubuntu'
 env.user = DEFAULT_USER
 env.hosts = ['localhost']
 
-print_only = False  # Print commands but do not execute them
+print_only = False # Print commands but do not execute them
 TEST_EXISTS_OUTPUT = False  # Value returned by exists
 
 ################################################
@@ -62,9 +62,16 @@ def random_integer(size):
 # Bash Wrappers
 ###############################################
 
-def apt_get(args, **kwargs):
-  command = "apt-get install %s" % args
-  runall([command], **kwargs)
+def apt_get(options, packages, **kwargs):
+  if options:
+    prefix = "-"
+  else:
+    prefix = ""
+  commands = '''
+    apt-get build-dep %s
+    apt-get install %s%s %s
+  ''' % (packages, prefix, options, packages)
+  runall(commands.split("\n"), **kwargs)
 
 def chmod(mode, path, **kwargs):
   command = "chmod %s %s" % (mode, path)

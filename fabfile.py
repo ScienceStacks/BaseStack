@@ -1,7 +1,8 @@
 '''Codes for creating a basic scientific statck on a linux VM'''
 
 
-from fabric.context_managers import cd
+from fabric.context_managers import lcd
+from contextlib import contextmanager
 from fabric_solo import (apt_get, chmod, chown, cp, exists, ln,
     mkdir, mv, rm, runall, sed, wget)
 
@@ -13,17 +14,26 @@ def setup(git_email="jlheller@uw.edu",
   setup_py()
   setup_apache()
 
-def setup_django():
-  apt_get("sqlite")
-  commands = '''
-    pip install django
-    django-admin startproject mysite
-  '''
-  runall(commands.splite('\n'), isSudo=True)
+DEFAULT_ENGINE = "django.db.backends.sqlite3"
+DEFAULT_NAME = "db.sqlite3"
+def setup_django(engine = DEFAULT_ENGINE,
+                 name = DEFAULT_NAME):
+  DJANGO_DIR = "$HOME/mysite/mysite"
+  apt_get("", "sqlite", isSudo=True)
+  runall(["pip install django"], isSudo=True)
+  if not exists("/usr/local/bin/django-admin"):
+    runall(["django-admin startproject mysite"], isSudo=False)
   # Modify settings to select the engine and name
-
+  # Modify the settings file
+  path = "%s/settings.py" % DJANGO_DIR
+  sed(path, DEFAULT_ENGINE, engine)
+  sed(path, DEFAULT_NAME, name)
+  # Set up the database
+  with lcd('$HOME/mysite'):
+    runall(["python manage.py migrate"], isSudo=False)
+   
 def setup_apache():
-  apt_get("-y apache2", isSudo=True)
+  apt_get("-y",  "apache2", isSudo=True)
   if not exists("/vagrant"):
     mkdir("$HOME/apache_home", isSudo=False)
     mkdir("$HOME/apache_home/html", isSudo=False)
@@ -56,7 +66,7 @@ def setup_py():
   runall(commands.split('\n'), isSudo=False)
 
 def install_chef():
-  with cd('$HOME'):
+  with lcd('$HOME'):
     commands = '''
        curl -L https://www.opscode.com/chef/install.sh | bash
        wget http://github.com/opscode/chef-repo/tarball/master
@@ -71,11 +81,11 @@ def install_chef():
       runall([command], isSudo=False)
 
 def install_tools():
-  apt_get("python-pip python-dev build-essential", isSudo=True)
+  apt_get("", "python-pip python-dev build-essential", isSudo=True)
   commands = '''
     pip install --upgrade pip 
     pip install --upgrade virtualenv 
   '''
   runall(commands.split('\n'), isSudo=True)
-  apt_get("curl", isSudo=True)
-  apt_get("vim", isSudo=True)
+  apt_get("", "curl", isSudo=True)
+  apt_get("", "vim", isSudo=True)
