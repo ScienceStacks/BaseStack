@@ -66,7 +66,7 @@ def apt_get(options, packages, **kwargs):
   commands = '''
     apt-get build-dep %s
     apt-get install -y%s %s
-  ''' % (packages, prefix, options, packages)
+  ''' % (packages, options, packages)
   runall(commands.split("\n"), **kwargs)
 
 def chmod(mode, path, **kwargs):
