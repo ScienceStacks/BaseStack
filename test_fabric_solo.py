@@ -1,37 +1,9 @@
 # Nose tests. Run using "nosetests --pdb". Debug by placing an
 # unexecuteable statement where pdb should get control (e.g., "xxyy")
 
-from util import static_var
+from util import (static_var, dummy_runall, dummy_exists_true,
+    dummy_exists_false)
 import fabric_solo as fs
-
-
-@static_var("command_list", [])
-def dummy_runall(commands, isSudo=False, 
-    initialize=False, interrogate=False):
-  # Fake for runall
-  # Input: commands - list of commands (as in runall)
-  #        isSudo - as in runall
-  #        initialize - initializes the list of commands
-  #        interrogate - returns the value of the list of commands
-  if initialize:
-    dummy_runall.command_list = []
-    return
-  elif interrogate:
-    return dummy_runall.command_list
-  else:
-    for cmd in commands:
-      if cmd.strip():  # Has non-blanks
-        dummy_runall.command_list.append(cmd.lstrip())
-    return
-
-def pt():
-  return dummy_runall.command_list
-
-def dummy_exists_true(path):
-  return True
-
-def dummy_exists_false(path):
-  return False
 
 
 class TestClass:
@@ -59,11 +31,11 @@ class TestClass:
     assert commands == COMMANDS_ONE
 
   def test_apt_get(self):
-    ARGS = "dummy file"
-    fs.apt_get(ARGS)
+    PACKAGE = "dummy"
+    fs.apt_get("", PACKAGE)
     commands = dummy_runall(None, interrogate=True)
-    expected_result = "apt-get install %s" % ARGS
-    assert(commands[0].index(expected_result) >= 0)
+    expected_result = "apt-get install -y %s" % PACKAGE
+    assert(commands[1].index(expected_result) >= 0)
 
   def test_chown(self):
     PATH = "/home/me"
@@ -142,3 +114,4 @@ class TestClass:
     commands = dummy_runall(None, interrogate=True)
     expected_result = "wget '%s'" % URL
     assert(commands[0].index(expected_result) >= 0)
+
