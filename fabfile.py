@@ -33,7 +33,7 @@ def setup_django(engine = DEFAULT_ENGINE,
     runall(["python manage.py migrate"], isSudo=False)
    
 def setup_apache():
-  apt_get("-y",  "apache2", isSudo=True)
+  apt_get("",  "apache2", isSudo=True)
   if not exists("/vagrant"):
     mkdir("$HOME/apache_home", isSudo=False)
     mkdir("$HOME/apache_home/html", isSudo=False)
@@ -63,7 +63,7 @@ def setup_py():
   commands = '''
     easy_install mock
   '''
-  runall(commands.split('\n'), isSudo=False)
+  runall(commands.split('\n'), isSudo=True)
 
 def install_chef():
   with lcd('$HOME'):

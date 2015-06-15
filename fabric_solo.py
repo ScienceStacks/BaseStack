@@ -63,13 +63,9 @@ def random_integer(size):
 ###############################################
 
 def apt_get(options, packages, **kwargs):
-  if options:
-    prefix = "-"
-  else:
-    prefix = ""
   commands = '''
     apt-get build-dep %s
-    apt-get install %s%s %s
+    apt-get install -y%s %s
   ''' % (packages, prefix, options, packages)
   runall(commands.split("\n"), **kwargs)
 
