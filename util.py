@@ -16,7 +16,7 @@ def static_var(varname, value):
 # Test utilities
 #####################################
 @static_var("command_list", [])
-def dummy_runall(commands, isSudo=False, 
+def dummy_runall(commands, isSudo=False, print_only=False,
     initialize=False, interrogate=False):
   # Fake for runall
   # Input: commands - list of commands (as in runall)
@@ -34,8 +34,8 @@ def dummy_runall(commands, isSudo=False,
         dummy_runall.command_list.append(cmd.lstrip())
     return
 
-def dummy_exists_true(path):
+def dummy_exists_true(path, **kwargs):
   return True
 
-def dummy_exists_false(path):
+def dummy_exists_false(path, **kwargs):
   return False

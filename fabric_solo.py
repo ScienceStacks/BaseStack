@@ -25,15 +25,11 @@ TEST_EXISTS_OUTPUT = False  # Value returned by exists
 ################################################
 # Utility functions
 ###############################################
-def runall(commands, **kwargs):
+def runall(commands, print_only=False, isSudo=False):
   # Run sudo on a list of commands
   # Input: commands - list of commands
   # kwargs:
   #        isSudo - command should be run using sudo
-  isSudo = False
-  for key, value in kwargs.iteritems():
-    if key == 'isSudo':
-      isSudo = value
   for cmd in commands:
     if cmd.strip():  # Must be a string with non-blanks
       if isSudo:
@@ -73,10 +69,10 @@ def chmod(mode, path, **kwargs):
   command = "chmod %s %s" % (mode, path)
   runall([command], **kwargs)
 
-def chown(path, new_owner=env.user):
+def chown(path, new_owner=env.user, **kwargs):
   # Changes the owner for the file path
   command = 'chown -R %s:%s %s' % (new_owner, new_owner, path)
-  runall([command], isSudo=True)
+  runall([command], isSudo=True, **kwargs)
 
 def cp(from_path, to_path, **kwargs):
   # Copies one file path to another
@@ -84,7 +80,8 @@ def cp(from_path, to_path, **kwargs):
   command = "cp %s %s" % (from_path, to_path)
   runall([command], **kwargs)
 
-def exists(path):
+def exists(path, **kwargs):
+  print "print_only: %s" % print_only
   if print_only:
     print "[debug local] exists %s" % path
     return TEST_EXISTS_OUTPUT

@@ -236,7 +236,8 @@ endfunction
 
 " insert Py debug
 function! InsertPyDebug()
-  let cmd = ":s/$/\r    import pdb; pdb.set_trace()/"
+  " let cmd = ":s/$/\r    import pdb; pdb.set_trace()/"
+  let cmd = ":s/$/\r    bogus_statement/"
   :execute cmd
 endfunction
 
@@ -272,7 +273,7 @@ endfunction
 
 
 nmap ,a :call AssignPyVariable ()<CR>
-nmap ,b :call DeleteTrailingBlanks ()<CR>
+nmap ,b :call CommentOutLines ()<CR>
 nmap ,c :call CopyLinesToBuffer ()<CR>
 nmap ,d :call DeleteLines ()<CR>
 nmap ,e :call SetEnvironment()<CR>
