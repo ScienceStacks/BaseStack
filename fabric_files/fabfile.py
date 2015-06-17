@@ -1,9 +1,12 @@
-'''Codes for creating a basic scientific statck on a linux VM'''
-
+'''
+  Codes for creating a basic scientific statck on a linux VM.
+  To see the commands that will be issued, use the flag
+  print_only=T
+'''
 
 from contextlib import contextmanager
-from fabric_solo import (apt_get, chmod, chown, cp, exists, lcd, ln,
-    mkdir, mv, rm, runall, sed, wget)
+from fabric_solo import (apt_get, chmod, chown, cp, exists, lcd,
+    ln, mkdir, mv, rm, runall, sed, wget)
 
 def setup(git_email="jlheller@uw.edu", 
     git_username="Joseph Hellerstein",
@@ -21,18 +24,25 @@ def setup_django(engine=DEFAULT_ENGINE,
                  print_only=False,
                  **kwargs):
   DJANGO_DIR = "$HOME/mysite/mysite"
-  apt_get("", "sqlite", isSudo=True, **kwargs)
-  runall(["pip install django"], isSudo=True, **kwargs)
-  if not exists("/usr/local/bin/django-admin", **kwargs):
-    runall(["django-admin startproject mysite"], isSudo=False, **kwargs)
+  apt_get("", "sqlite", isSudo=True, 
+      print_only=print_only, **kwargs)
+  runall(["pip install django"], isSudo=True, 
+      print_only=print_only, **kwargs)
+  if exists("/usr/local/bin/django-admin", 
+      print_only=print_only, **kwargs):
+    runall(["(cd $HOME; django-admin startproject mysite)"], 
+      isSudo=False, print_only=print_only, **kwargs)
   # Modify settings to select the engine and name
   # Modify the settings file
   path = "%s/settings.py" % DJANGO_DIR
-  sed(path, DEFAULT_ENGINE, engine, **kwargs)
-  sed(path, DEFAULT_NAME, name, **kwargs)
+  sed(path, DEFAULT_ENGINE, engine, 
+     print_only=print_only, **kwargs)
+  sed(path, DEFAULT_NAME, name, 
+    print_only=print_only, **kwargs)
   # Set up the database
-  with lcd('$HOME/mysite', print_only=print_only):
-    runall(["python manage.py migrate"], isSudo=False, **kwargs)
+  lcd('$HOME/mysite', print_only=print_only)
+  command = "(cd $HOME/mysite; python manage.py migrate)"
+  runall([command], isSudo=False, print_only=print_only, **kwargs)
   
 ## BUG. print_only becomes false in solo.exists 
 def setup_apache(**kwargs):

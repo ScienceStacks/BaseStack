@@ -16,4 +16,4 @@ apt_get fabric
 apt_get ssh
 
 cd $HOME/BaseStack/fabric_files
-#fab setup
+fab setup

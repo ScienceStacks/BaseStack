@@ -85,7 +85,7 @@ def exists(path, print_only=False):
     print "[debug local] exists %s" % path
     return TEST_EXISTS_OUTPUT
   else: 
-    print "[local] exists %s" % path
+    print "[local] exists %s is: %s" % (path, fcf.exists(path))
     return fcf.exists(path)
 
 def lcd(path, print_only=False):
