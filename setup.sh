@@ -8,7 +8,7 @@ function apt_get {
   echo "***apt-get build-dep $1" &>> $FILE_OUT
   sudo apt-get build-dep $1 &>> $FILE_OUT
   echo "***apt-get install $1" &>> $FILE_OUT
-  sudo apt-get install $1 & $FILE_OUT
+  sudo apt-get install $1 &>> $FILE_OUT
 }
 
 # Do the installs
