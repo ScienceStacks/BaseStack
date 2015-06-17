@@ -82,7 +82,7 @@ class TestClass:
   def test_mkdir(self):
     fs.exists = dummy_exists_false
     PATH = "t.x"
-    fs.mkdir(PATH)
+    fs.mkdir(PATH, print_only=False)
     commands = dummy_runall(None, interrogate=True)
     expected_result = "mkdir %s" % PATH
     assert(commands[0].index(expected_result) >= 0)
@@ -91,9 +91,17 @@ class TestClass:
     fs.exists = dummy_exists_true
     FROM_PATH = "t.x"
     TO_PATH = "t.y"
-    fs.mv(FROM_PATH, TO_PATH)
+    fs.mv(FROM_PATH, TO_PATH, print_only=False)
     commands = dummy_runall(None, interrogate=True)
     expected_result = "mv %s %s" % (FROM_PATH, TO_PATH)
+    assert(commands[0].index(expected_result) >= 0)
+
+  def test_rm(self):
+    fs.exists = dummy_exists_true
+    PATH = "t.x"
+    fs.rm(PATH, print_only=False)
+    commands = dummy_runall(None, interrogate=True)
+    expected_result = "rm %s" % PATH
     assert(commands[0].index(expected_result) >= 0)
 
   def test_sed(self):

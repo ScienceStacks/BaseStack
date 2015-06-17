@@ -1,9 +1,8 @@
 '''Codes for creating a basic scientific statck on a linux VM'''
 
 
-from fabric.context_managers import lcd
 from contextlib import contextmanager
-from fabric_solo import (apt_get, chmod, chown, cp, exists, ln,
+from fabric_solo import (apt_get, chmod, chown, cp, exists, lcd, ln,
     mkdir, mv, rm, runall, sed, wget)
 
 def setup(git_email="jlheller@uw.edu", 
@@ -19,6 +18,7 @@ DEFAULT_ENGINE = "django.db.backends.sqlite3"
 DEFAULT_NAME = "db.sqlite3"
 def setup_django(engine=DEFAULT_ENGINE,
                  name=DEFAULT_NAME, 
+                 print_only=False,
                  **kwargs):
   DJANGO_DIR = "$HOME/mysite/mysite"
   apt_get("", "sqlite", isSudo=True, **kwargs)
@@ -29,16 +29,14 @@ def setup_django(engine=DEFAULT_ENGINE,
   # Modify the settings file
   path = "%s/settings.py" % DJANGO_DIR
   sed(path, DEFAULT_ENGINE, engine, **kwargs)
-  sed(path, DEFAULT_NAME, name, kwargs)
+  sed(path, DEFAULT_NAME, name, **kwargs)
   # Set up the database
-  ## FIX SO CAN TAKE **KWARGS
-  with lcd('$HOME/mysite'):
+  with lcd('$HOME/mysite', print_only=print_only):
     runall(["python manage.py migrate"], isSudo=False, **kwargs)
   
 ## BUG. print_only becomes false in solo.exists 
 def setup_apache(**kwargs):
   apt_get("",  "apache2", isSudo=True, **kwargs)
-  print kwargs
   if not exists("/vagrant", **kwargs):
     mkdir("$HOME/apache_home", isSudo=False, **kwargs)
     mkdir("$HOME/apache_home/html", isSudo=False, **kwargs)
@@ -65,7 +63,7 @@ def setup_env(git_email, git_username, **kwargs):
   runall(commands.split('\n'), isSudo=False, **kwargs)
 
 def install_chef(**kwargs):
-  with lcd('$HOME'):
+  with lcd('$HOME', print_only=kwargs['print_only']):
     commands = '''
        curl -L https://www.opscode.com/chef/install.sh | bash
        wget http://github.com/opscode/chef-repo/tarball/master

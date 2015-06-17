@@ -7,6 +7,8 @@ import fabfile as fb
 import fabric_solo as fs
 
 
+TRUTH_VALUES = [True, False]
+
 class TestClass:
 
   @staticmethod
@@ -29,8 +31,39 @@ class TestClass:
     dummy_runall(None, initialize=True)
  
   def test_setup(self):
-    self.set_exists(False)
-    fb.setup()
-    commands = dummy_runall(None, interrogate=True)
-    assert(len(commands) > 0)
+    for val in TRUTH_VALUES:
+      self.set_exists(val)
+      fb.setup()
+      commands = dummy_runall(None, interrogate=True)
+      assert(len(commands) > 0)
+ 
+  def test_install_tools(self):
+    for val in TRUTH_VALUES:
+      self.set_exists(val)
+      fb.install_tools()
+      commands = dummy_runall(None, interrogate=True)
+      assert(len(commands) > 0)
+ 
+  def test_setup_env(self):
+    EMAIL = "me@there.com"
+    NAME = "Mickey Mouse"
+    for val in TRUTH_VALUES:
+      self.set_exists(val)
+      fb.setup_env(EMAIL, NAME)
+      commands = dummy_runall(None, interrogate=True)
+      assert(len(commands) > 0)
+ 
+  def test_setup_apache(self):
+    for val in TRUTH_VALUES:
+      self.set_exists(val)
+      fb.setup_apache()
+      commands = dummy_runall(None, interrogate=True)
+      assert(len(commands) > 0)
+ 
+  def test_setup_django(self):
+    for val in TRUTH_VALUES:
+      self.set_exists(val)
+      fb.setup_django()
+      commands = dummy_runall(None, interrogate=True)
+      assert(len(commands) > 0)
   

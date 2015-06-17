@@ -11,6 +11,7 @@
     url - string for a URL
 '''
 
+from fabric.context_managers import lcd
 from fabric.api import env, local, sudo
 import fabric.contrib.files as fcf
 from random import random
@@ -19,7 +20,6 @@ DEFAULT_USER = 'ubuntu'
 env.user = DEFAULT_USER
 env.hosts = ['localhost']
 
-print_only = False # Print commands but do not execute them
 TEST_EXISTS_OUTPUT = False  # Value returned by exists
 
 ################################################
@@ -80,8 +80,7 @@ def cp(from_path, to_path, **kwargs):
   command = "cp %s %s" % (from_path, to_path)
   runall([command], **kwargs)
 
-def exists(path, **kwargs):
-  print "print_only: %s" % print_only
+def exists(path, print_only=False):
   if print_only:
     print "[debug local] exists %s" % path
     return TEST_EXISTS_OUTPUT
@@ -89,25 +88,32 @@ def exists(path, **kwargs):
     print "[local] exists %s" % path
     return fcf.exists(path)
 
-def ln(options, path, link, **kwargs):
-  if not exists(link):
+def lcd(path, print_only=False):
+  if print_only:
+    print "[debug local] lcd %s" % path
+  else: 
+    print "[local] lcd %s" % path
+    return fcf.lcd(path)
+
+def ln(options, path, link, print_only=False, **kwargs):
+  if not exists(link, print_only=print_only):
     command = "ln -%s %s %s" % (options, path, link)
-    runall([command], **kwargs)
+    runall([command], print_only=print_only, **kwargs)
 
-def mkdir(path, **kwargs):
-  if not exists(path):
+def mkdir(path, print_only=False, **kwargs):
+  if not exists(path, print_only=print_only):
     command = "mkdir %s" % path
-    runall([command], **kwargs)
+    runall([command], print_only=print_only, **kwargs)
 
-def mv(from_path, to_path, **kwargs):
-  if exists(from_path):
+def mv(from_path, to_path, print_only=False, **kwargs):
+  if exists(from_path, print_only=print_only):
     command = "mv %s %s" % (from_path, to_path)
-    runall([command], **kwargs)
+    runall([command], print_only=print_only, **kwargs)
 
-def rm(path, **kwargs):
-  if exists(path):
+def rm(path, print_only=False, **kwargs):
+  if exists(path, print_only=print_only):
     command = "rm %s" % path
-    runall([command], **kwargs)
+    runall([command], print_only=print_only, **kwargs)
 
 def sed(path, src_string, rpl_string, **kwargs):
   tmp_path = "/tmp/%d" % random_integer(10)
