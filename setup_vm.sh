@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 
-FILE_OUT="/tmp/base_stack.txt"
-
 function apt_get {
 # Arg 1: package
-  echo "apt-get build-dep $1" >> $FILE_OUT
-  sudo apt-get build-dep $1 &>> $FILE_OUT
-  echo "apt-get install $1" >> $FILE_OUT
-  sudo apt-get install $1 &>> $FILE_OUT
+  echo "apt-get build-dep $1"
+  sudo apt-get build-dep $1 
+  echo "apt-get install $1"
+  sudo apt-get install $1 
 }
 
 # Update the local repository
-sudo apt-get update > $FILE_OUT
+sudo apt-get update
 
 # Install git
 apt_get git
