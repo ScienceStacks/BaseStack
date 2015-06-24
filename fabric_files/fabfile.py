@@ -28,6 +28,22 @@ def setup(git_email="jlheller@uw.edu",
   setup_env(git_email, git_username, print_only=print_only)
   setup_apache(print_only=print_only)
 
+# UNDER DEVELOPMENT
+# Need to:
+#  1. Show how connect to database
+#  2. Allow ubuntu user access
+# Setup for the postgress database
+def setup_postgresql(print_only=False,
+                     **kwargs):
+  apt_get("postgreslql postgresql-contrib", 
+      isSudo=True, print_only=print_only, **kwargs)
+  apt_get("sudo apt-get install pgadmin3",
+      isSudo=True, print_only=print_only, **kwargs)
+  runall(["-u postgres psql -c \"CREATE USER ubuntu WITH PASSWORD 'postgres';\"",
+
+      isSudo=True, 
+      print_only=print_only, **kwargs)
+
 # This setup assumes that setup_apache has already been done
 # To install a new site, use
 #  1.  Create a conf_file that points to the appropriate directories
