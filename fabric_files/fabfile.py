@@ -46,15 +46,15 @@ def setup_django(engine=DEFAULT_ENGINE,
   
 def setup_apache(**kwargs):
   apt_get("",  "apache2 libapache2-mod-wsgi", isSudo=True, **kwargs)
-#  if not exists("/vagrant", **kwargs):
-#    mkdir("$HOME/apache_home", isSudo=False, **kwargs)
-#    mkdir("$HOME/apache_home/html", isSudo=False, **kwargs)
-#    command = 'echo "Hello ubuntu World!" > '
-#    command += '$HOME/apache_home/html/index.html'
-#    runall([command], isSudo=False, **kwargs)
-#    ln("s", "$HOME/apache_home", "/vagrant", isSudo=True, **kwargs)
-#  runall(["rm -rf /var/www"], isSudo=True, **kwargs)
-#  runall(["ln -fs /vagrant /var/www"], isSudo=True, **kwargs)
+  if not exists("/vagrant", **kwargs):
+    mkdir("$HOME/apache_home", isSudo=False, **kwargs)
+    mkdir("$HOME/apache_home/html", isSudo=False, **kwargs)
+    command = 'echo "Hello ubuntu World!" > '
+    command += '$HOME/apache_home/html/index.html'
+    runall([command], isSudo=False, **kwargs)
+    ln("s", "$HOME/apache_home", "/vagrant", isSudo=True, **kwargs)
+  runall(["rm -rf /var/www"], isSudo=True, **kwargs)
+  runall(["ln -fs /vagrant /var/www"], isSudo=True, **kwargs)
 
 def copy_file_in_bin_to_HOME(filename, **kwargs):
   cp('$HOME/BaseStack/bin/%s' % filename, '$HOME', isSudo=True, **kwargs)
