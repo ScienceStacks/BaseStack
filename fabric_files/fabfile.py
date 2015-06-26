@@ -51,6 +51,9 @@ def setup_django(engine=DEFAULT_ENGINE,
   # Set up the site defined in this repo
   cp(SITE_DIR, '$HOME', options="rf", isSudo=False, 
       print_only=print_only, **kwargs)
+  cp("%s/etc_files/000-default.conf" % REPO_PATH, 
+      '/etc/apache2/sites-available/000-default.conf', 
+      options="rf", isSudo=True, print_only=print_only, **kwargs)
 
   
 def setup_apache(**kwargs):
@@ -66,9 +69,6 @@ def setup_apache(**kwargs):
     ln("s", "$HOME/apache_home", "/vagrant", isSudo=True, **kwargs)
   runall(["rm -rf /var/www"], isSudo=True, **kwargs)
   runall(["ln -fs /vagrant /var/www"], isSudo=True, **kwargs)
-  cp("%s/etc_files/000-default.conf" % REPO_PATH, 
-      '/etc/apache2/000-default.conf', 
-      options="rf", isSudo=True, **kwargs)
 
 def copy_file_in_bin_to_HOME(filename, **kwargs):
   cp("%s/bin/%s" % (REPO_PATH, filename), 
