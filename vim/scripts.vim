@@ -248,7 +248,7 @@ endfunction
 
 " Comment out lines
 " Current pointer should be at the end of the range
-function! CommentOutLines()
+function! CommentLines()
   let cur_pos = getpos(".")
   let line_num = input("Start line?")
   if len(line_num) == 0
@@ -256,6 +256,20 @@ function! CommentOutLines()
   endif
   let cmd_range = ":" . line_num . "," . string(cur_pos[1])
   let cmd = cmd_range . "s/^/#mock/"
+  :execute cmd
+  call setpos(".", cur_pos)
+endfunction
+
+" Comment out lines
+" Current pointer should be at the end of the range
+function! UnCommentLines()
+  let cur_pos = getpos(".")
+  let line_num = input("Start line?")
+  if len(line_num) == 0
+    let line_num = string(cur_pos[1])
+  endif
+  let cmd_range = ":" . line_num . "," . string(cur_pos[1])
+  let cmd = cmd_range . "s/^#mock//"
   :execute cmd
   call setpos(".", cur_pos)
 endfunction
@@ -273,10 +287,11 @@ endfunction
 
 
 nmap ,a :call AssignPyVariable ()<CR>
-nmap ,b :call CommentOutLines ()<CR>
+nmap ,b :call CommentLines ()<CR>
 nmap ,c :call CopyLinesToBuffer ()<CR>
 nmap ,d :call DeleteLines ()<CR>
 nmap ,e :call SetEnvironment()<CR>
+nmap ,f :call UnCommentLines ()<CR>
 nmap ,g :call ChangeP4Password ()<CR>
 nmap ,i :call IndentPyLines()<CR>
 nmap ,l :call MakeAllVariableLocal ()<CR>

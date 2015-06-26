@@ -37,16 +37,15 @@ def runall(commands, print_only=False, isSudo=False):
           if not print_only:
             sudo(cmd, pty=True)
           else:
-            print "[sudo debug] %s" % cmd
+            print "[debug sudo] %s" % cmd
         except Exception as e:
           print e
       else:
         try: 
           if not print_only:
-            print "[local] %s" % cmd
             local(cmd, env.user)
           else:
-            print "[local debug] %s" % cmd
+            print "[debug local] %s" % cmd
         except Exception as e:
           print e
 
@@ -74,10 +73,14 @@ def chown(path, new_owner=env.user, **kwargs):
   command = 'chown -R %s:%s %s' % (new_owner, new_owner, path)
   runall([command], isSudo=True, **kwargs)
 
-def cp(from_path, to_path, **kwargs):
+def cp(from_path, to_path, options="", **kwargs):
   # Copies one file path to another
   # TBD: Handle errors
-  command = "cp %s %s" % (from_path, to_path)
+  if options:
+    addendum = "-%s " % options
+  else:
+    addendum = ""
+  command = "cp %s%s %s" % (addendum, from_path, to_path)
   runall([command], **kwargs)
 
 def exists(path, print_only=False):

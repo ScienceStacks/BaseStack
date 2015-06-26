@@ -61,6 +61,12 @@ class TestClass:
     commands = dummy_runall(None, interrogate=True)
     expected_result = "cp %s %s" % (PATH1, PATH2)
     assert(commands[0].index(expected_result) >= 0)
+    options = "rf"
+    dummy_runall(None, initialize=True)
+    fs.cp(PATH1, PATH2, options="rf")
+    commands = dummy_runall(None, interrogate=True)
+    expected_result = "cp -%s %s %s" % (options, PATH1, PATH2)
+    assert(commands[0].index(expected_result) >= 0)
 
 # TODO: Have a test that doesn't require user interactions
   def test_exists(self):
