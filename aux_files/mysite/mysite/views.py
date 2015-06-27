@@ -6,4 +6,4 @@ from django.http import HttpResponse
 # Request handlers
 #######################
 def hello(request):
-  return HttpResponse("Hello django wsgi world")
+  return HttpResponse("Hello django wsgi world!!")

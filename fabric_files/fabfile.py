@@ -9,6 +9,7 @@ from fabric_solo import (apt_get, chmod, chown, cp, exists, lcd,
     ln, mkdir, mv, rm, runall, sed, wget)
 
 REPO_PATH = "$HOME/BaseStack"
+BIN_PATH = "%s/bin" % REPO_PATH
 
 def setup(git_email="jlheller@uw.edu", 
     git_username="Joseph Hellerstein",
@@ -22,9 +23,8 @@ def setup(git_email="jlheller@uw.edu",
 DEFAULT_ENGINE = "django.db.backends.sqlite3"
 DEFAULT_NAME = "db.sqlite3"
 SITE_NAME = "mysite"
-SITE_DIR = "%s/%s" % (REPO_PATH, SITE_NAME)
+SITE_DIR = "%s/aux_files/%s" % (REPO_PATH, SITE_NAME)
 APP_DIR = "%s/%s" % (SITE_DIR, SITE_NAME)
-INSTALL_DIR = "%s/%s" % (REPO_PATH, SITE_NAME)
 def setup_django(engine=DEFAULT_ENGINE,
                  name=DEFAULT_NAME, 
                  print_only=False,
@@ -32,12 +32,6 @@ def setup_django(engine=DEFAULT_ENGINE,
   apt_get("", "sqlite", isSudo=True, print_only=print_only, **kwargs)
   runall(["pip install django"], isSudo=True, 
       print_only=print_only, **kwargs)
-  if exists("/usr/local/bin/django-admin", print_only=print_only, 
-      **kwargs):
-    if not exists(SITE_DIR, print_only=print_only, 
-        **kwargs):
-      runall(["(cd $HOME; django-admin startproject %s)" % SITE_NAME], 
-          isSudo=False, print_only=print_only, **kwargs)
   # Modify settings to select the engine and name
   # Modify the settings file
   path = "%s/settings.py" % APP_DIR
@@ -45,15 +39,11 @@ def setup_django(engine=DEFAULT_ENGINE,
      print_only=print_only, **kwargs)
   sed(path, DEFAULT_NAME, name, 
     print_only=print_only, **kwargs)
-  # Set up the database
-  command = "(cd %s; python manage.py migrate)" % SITE_DIR
-  runall([command], isSudo=False, print_only=print_only, **kwargs)
-  # Set up the site defined in this repo
-  cp(SITE_DIR, '$HOME', options="rf", isSudo=False, 
-      print_only=print_only, **kwargs)
-  cp("%s/etc_files/000-default.conf" % REPO_PATH, 
+  cp("%s/aux_files/000-default.conf" % REPO_PATH, 
       '/etc/apache2/sites-available/000-default.conf', 
-      options="rf", isSudo=True, print_only=print_only, **kwargs)
+      options="f", isSudo=True, print_only=print_only, **kwargs)
+  runall(["bash %s/apache_restart.sh" % BIN_PATH], isSudo=True, 
+      print_only=print_only, **kwargs)
 
   
 def setup_apache(**kwargs):
