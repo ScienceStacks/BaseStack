@@ -57,7 +57,7 @@ def random_integer(size):
 # Bash Wrappers
 ###############################################
 
-def apt_get(options, packages, **kwargs):
+def apt_get(packages, options="", **kwargs):
   commands = '''
     apt-get build-dep %s
     apt-get install -y%s %s
