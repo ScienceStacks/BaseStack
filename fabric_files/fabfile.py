@@ -33,16 +33,28 @@ def setup(git_email="jlheller@uw.edu",
 #  1. Show how connect to database
 #  2. Allow ubuntu user access
 # Setup for the postgress database
-def setup_postgresql(print_only=False,
+USER = 'ubuntu'
+def setup_postgres(db=None,
+                     print_only=False,
                      **kwargs):
   apt_get("postgreslql postgresql-contrib", 
       isSudo=True, print_only=print_only, **kwargs)
   apt_get("sudo apt-get install pgadmin3",
       isSudo=True, print_only=print_only, **kwargs)
-  runall(["-u postgres psql -c \"CREATE USER ubuntu WITH PASSWORD 'postgres';\"",
-
-      isSudo=True, 
-      print_only=print_only, **kwargs)
+  #runall(["-u postgres psql -c \"CREATE USER ubuntu WITH PASSWORD 'postgres';\"",
+#mock      isSudo=True, 
+#mock      print_only=print_only, **kwargs)
+  runall(["createuser -d %s" % USER], 
+       isSudo=True, print_only=print_only, **kwargs)
+  if db is not None:
+    runall(["createdb -O %s %s" % (USER, db)],
+         isSudo=True, print_only=print_only, **kwargs)
+  # Table manipulation from the command line. Lower case are variables
+  # that should be substituted.
+  # CREATE TABLE table_nmae (col_name1 data_type2, col_name2 data_type2);
+  # INSERT INTO table_name (col_name1, col_name2) VALUES (value1, value2);
+  # SELECT * FROM table_name
+  
 
 # This setup assumes that setup_apache has already been done
 # To install a new site, use

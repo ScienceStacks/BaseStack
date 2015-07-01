@@ -66,4 +66,12 @@ class TestClass:
       fb.setup_django()
       commands = dummy_runall(None, interrogate=True)
       assert(len(commands) > 0)
+ 
+  def test_setup_postgres(self):
+    for val in TRUTH_VALUES:
+      for db in [None, "dummy"]:
+        self.set_exists(val)
+        fb.setup_postgres(db=db)
+        commands = dummy_runall(None, interrogate=True)
+        assert(len(commands) > 0)
   
