@@ -42,9 +42,6 @@ def setup_postgres(db=None,
       isSudo=True, print_only=print_only, **kwargs)
   apt_get("pgadmin3",
       isSudo=True, print_only=print_only, **kwargs)
-  #runall(["-u postgres psql -c \"CREATE USER ubuntu WITH PASSWORD 'postgres';\"",
-#mock      isSudo=True, 
-#mock      print_only=print_only, **kwargs)
   runall(["createuser -d %s" % USER],
        isSudo=True, print_only=print_only, user="postgres", **kwargs)
   if db is not None:
@@ -52,7 +49,7 @@ def setup_postgres(db=None,
          isSudo=False, print_only=print_only, **kwargs)
   # Table manipulation from the command line. Lower case are variables
   # that should be substituted. preface these commands with
-  # "psql dummy -c"
+  # "PSQL db -c"
   # CREATE TABLE table_name (col_name1 data_type2, col_name2 data_type2);
   # INSERT INTO table_name (col_name1, col_name2) VALUES (value1, value2);
   # SELECT * FROM table_name
