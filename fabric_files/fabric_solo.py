@@ -25,7 +25,7 @@ TEST_EXISTS_OUTPUT = False  # Value returned by exists
 ################################################
 # Utility functions
 ###############################################
-def runall(commands, print_only=False, isSudo=False):
+def runall(commands, user='root', print_only=False, isSudo=False):
   # Run sudo on a list of commands
   # Input: commands - list of commands
   # kwargs:
@@ -35,9 +35,9 @@ def runall(commands, print_only=False, isSudo=False):
       if isSudo:
         try:
           if not print_only:
-            sudo(cmd, pty=True)
+            sudo(cmd, pty=True, user=user)
           else:
-            print "[debug sudo] %s" % cmd
+            print "[debug sudo user=%s] %s" % (user, cmd)
         except Exception as e:
           print e
       else:

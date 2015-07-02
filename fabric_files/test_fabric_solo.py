@@ -34,7 +34,7 @@ class TestClass:
     PACKAGE = "dummy"
     fs.apt_get("", PACKAGE)
     commands = dummy_runall(None, interrogate=True)
-    expected_result = "apt-get install -y%s" % PACKAGE
+    expected_result = "apt-get -qq install -y%s" % PACKAGE
     assert(commands[1].index(expected_result) >= 0)
 
   def test_chown(self):

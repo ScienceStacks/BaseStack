@@ -16,7 +16,7 @@ def static_var(varname, value):
 # Test utilities
 #####################################
 @static_var("command_list", [])
-def dummy_runall(commands, isSudo=False, print_only=False,
+def dummy_runall(commands, isSudo=False, print_only=False, user=None,
     initialize=False, interrogate=False):
   # Fake for runall
   # Input: commands - list of commands (as in runall)

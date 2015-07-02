@@ -18,6 +18,7 @@ SITE_NAME = "mysite"
 SITE_DIR = "%s/aux_files/%s" % (REPO_PATH, SITE_NAME)
 APP_DIR = "%s/%s" % (SITE_DIR, SITE_NAME)
 CONF_PATH = "%s/aux_files/000-default.conf" % REPO_PATH
+SUDO_PW = "ubuntu"
 
 def setup(git_email="jlheller@uw.edu", 
     git_username="Joseph Hellerstein",
@@ -37,21 +38,22 @@ USER = 'ubuntu'
 def setup_postgres(db=None,
                      print_only=False,
                      **kwargs):
-  apt_get("postgreslql postgresql-contrib", 
+  apt_get("postgresql postgresql-contrib", 
       isSudo=True, print_only=print_only, **kwargs)
-  apt_get("sudo apt-get install pgadmin3",
+  apt_get("pgadmin3",
       isSudo=True, print_only=print_only, **kwargs)
   #runall(["-u postgres psql -c \"CREATE USER ubuntu WITH PASSWORD 'postgres';\"",
 #mock      isSudo=True, 
 #mock      print_only=print_only, **kwargs)
-  runall(["createuser -d %s" % USER], 
-       isSudo=True, print_only=print_only, **kwargs)
+  runall(["createuser -d %s" % USER],
+       isSudo=True, print_only=print_only, user="postgres", **kwargs)
   if db is not None:
     runall(["createdb -O %s %s" % (USER, db)],
-         isSudo=True, print_only=print_only, **kwargs)
+         isSudo=False, print_only=print_only, **kwargs)
   # Table manipulation from the command line. Lower case are variables
-  # that should be substituted.
-  # CREATE TABLE table_nmae (col_name1 data_type2, col_name2 data_type2);
+  # that should be substituted. preface these commands with
+  # "psql dummy -c"
+  # CREATE TABLE table_name (col_name1 data_type2, col_name2 data_type2);
   # INSERT INTO table_name (col_name1, col_name2) VALUES (value1, value2);
   # SELECT * FROM table_name
   
