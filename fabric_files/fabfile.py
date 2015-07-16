@@ -112,8 +112,6 @@ def setup_env(git_email, git_username, print_only=False, **kwargs):
     git config --global user.name "%s"
   ''' % (git_email, git_username)
   runall(commands.split('\n'), isSudo=False, **kwargs)
-  runall(["pip install numpy"], isSudo=True, 
-      print_only=print_only, **kwargs)
 
 def install_chef(**kwargs):
   with lcd('$HOME', print_only=kwargs['print_only']):
@@ -137,5 +135,7 @@ def install_tools(**kwargs):
     pip install --upgrade virtualenv 
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
+  runall(["pip install numpy"], isSudo=True, 
+      print_only=print_only, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
