@@ -236,8 +236,8 @@ endfunction
 
 " insert Py debug
 function! InsertPyDebug()
-  " let cmd = ":s/$/\r    import pdb; pdb.set_trace()/"
-  let cmd = ":s/$/\r    bogus_statement/"
+  let cmd = ":s/$/\r    import pdb; pdb.set_trace()/"
+  "  let cmd = ":s/$/\r    bogus_statement/"
   :execute cmd
 endfunction
 

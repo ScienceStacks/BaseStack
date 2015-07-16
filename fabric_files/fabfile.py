@@ -103,7 +103,7 @@ def copy_file_in_bin_to_HOME(filename, **kwargs):
   chmod('+x', filename, isSudo=True, **kwargs)
   chown(filename, **kwargs)
 
-def setup_env(git_email, git_username, **kwargs):
+def setup_env(git_email, git_username, print_only=False, **kwargs):
   copy_file_in_bin_to_HOME(".bashrc", **kwargs)
   copy_file_in_bin_to_HOME(".vimrc", **kwargs)
   # Git configuration
@@ -112,6 +112,8 @@ def setup_env(git_email, git_username, **kwargs):
     git config --global user.name "%s"
   ''' % (git_email, git_username)
   runall(commands.split('\n'), isSudo=False, **kwargs)
+  runall(["pip install numpy"], isSudo=True, 
+      print_only=print_only, **kwargs)
 
 def install_chef(**kwargs):
   with lcd('$HOME', print_only=kwargs['print_only']):
