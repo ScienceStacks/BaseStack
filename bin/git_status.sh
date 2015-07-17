@@ -1,1 +1,2 @@
-git status | grep "/" | grep -v ".swp" | grep -v ".pyc" | grep -v "modified:"
+# Inquire about git status, filtering noise files
+git status | grep -v "\.pyc" | grep -v "\.swp"
