@@ -139,3 +139,12 @@ def install_tools(**kwargs):
       print_only=print_only, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
+  # Install jslint
+  apt_get("nodejs npm", isSudo=True, **kwargs)
+  commands = '''
+    cd /user/share;
+    mkdir jslint;
+    npm install jslint;
+  '''
+  runall(commands.split('\n'), isSudo=True, **kwargs)
+    

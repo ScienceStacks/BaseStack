@@ -1,1 +1,1 @@
-python html5check.py $1
+python $HOME/BaseStack/bin/html5check.py $1
