@@ -147,4 +147,10 @@ def install_tools(**kwargs):
     npm install jslint;
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
+  commands = '''
+    npm install smash uglify-js slickgrid
+    ln -s /usr/bin/nodejs /usr/bin/node
+  '''
+  runall(commands.split('\n'), isSudo=True, **kwargs)
+  
     
