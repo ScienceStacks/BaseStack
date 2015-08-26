@@ -19,14 +19,17 @@ SITE_DIR = "%s/aux_files/%s" % (REPO_PATH, SITE_NAME)
 APP_DIR = "%s/%s" % (SITE_DIR, SITE_NAME)
 CONF_PATH = "%s/aux_files/000-default.conf" % REPO_PATH
 SUDO_PW = "ubuntu"
+GIT_EMAIL = "jlheller@uw.edu"
+GIT_USERNAME = "Joseph Hellerstein"
 
-def setup(git_email="jlheller@uw.edu", 
-    git_username="Joseph Hellerstein",
+def setup(git_email=GIT_EMAIL,
+    git_username=GIT_USERNAME,
     print_only="F"):
   # Invokes all setups to do
   print_only = (print_only == 'T')
   install_tools(print_only=print_only)
-  setup_env(git_email, git_username, print_only=print_only)
+  setup_env(git_email=git_email, git_username=git_username, 
+      print_only=print_only)
   setup_apache(print_only=print_only)
 
 # UNDER DEVELOPMENT
@@ -103,7 +106,8 @@ def copy_file_in_bin_to_HOME(filename, **kwargs):
   chmod('+x', filename, isSudo=True, **kwargs)
   chown(filename, **kwargs)
 
-def setup_env(git_email, git_username, print_only=False, **kwargs):
+def setup_env(git_email=GIT_EMAIL,
+    git_username=GIT_USERNAME, print_only=False, **kwargs):
   copy_file_in_bin_to_HOME(".bashrc", **kwargs)
   copy_file_in_bin_to_HOME(".vimrc", **kwargs)
   # Git configuration
@@ -135,14 +139,13 @@ def install_tools(**kwargs):
     pip install --upgrade virtualenv 
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
-  runall(["pip install numpy"], isSudo=True, 
-      print_only=print_only, **kwargs)
+  runall(["pip install numpy"], isSudo=True, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
   # Install jslint
   apt_get("nodejs npm", isSudo=True, **kwargs)
   commands = '''
-    cd /user/share;
+    cd /usr/share;
     mkdir jslint;
     npm install jslint;
   '''
