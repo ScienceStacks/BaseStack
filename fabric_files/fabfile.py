@@ -151,7 +151,7 @@ def install_tools(**kwargs):
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   commands = '''
-    npm install smash uglify-js slickgrid
+    npm install smash uglify-js slickgrid yui
     npm install uglifycss -g
     ln -s /usr/bin/nodejs /usr/bin/node
   '''
