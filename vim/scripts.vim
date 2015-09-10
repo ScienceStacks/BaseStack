@@ -1,5 +1,4 @@
-" Environment
-" Delete trailing blanks
+" Environment " Delete trailing blanks
 function! DeleteTrailingBlanks ()
   let cur_pos = getpos(".")
   0,$s/ *$//
@@ -234,6 +233,30 @@ function! AssignPyVariable()
   :execute cmd
 endfunction
 
+" Insert JSLint control statements
+function! InsertJSLintControl()
+  let cmd = ":0s/$/\r\\/*jslint indent: 2 *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jslint browser: true *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jslint unparam: true*\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*global alert, YAHOO *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint onevar: false *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jslint plusplus: true *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint yui: true *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint jquery: true *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint qunit: true *\\//"
+  :execute cmd
+  let cmd = ":0d"
+  :execute cmd
+endfunction
+
 " insert Py debug
 function! InsertPyDebug()
   let cmd = ":s/$/\r    import pdb; pdb.set_trace()/"
@@ -294,6 +317,7 @@ nmap ,e :call SetEnvironment()<CR>
 nmap ,f :call UnCommentLines ()<CR>
 nmap ,g :call ChangeP4Password ()<CR>
 nmap ,i :call IndentPyLines()<CR>
+nmap ,j :call InsertJSLintControl()<CR>
 nmap ,l :call MakeAllVariableLocal ()<CR>
 nmap ,p :call InsertPyDebug ()<CR>
 nmap ,q :call ChangeDoubleQuoteToSingleQuote ()<CR>
