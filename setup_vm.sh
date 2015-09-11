@@ -17,5 +17,6 @@ apt_get git
 # Get the base repo
 git clone https://github.com/ScienceStacks/BaseStack.git
 cd $HOME/BaseStack
+git config credential.helper store  # Avoid repeated entry of creds
 bash setup.sh
 echo "Success!"
