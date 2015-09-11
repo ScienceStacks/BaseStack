@@ -6,6 +6,7 @@ alias g=". g.sh"
 alias gs="git_status.sh"
 alias ll="ls -l"
 alias lx=lx.sh
+alias q="qunit.sh"
 alias ra="apache_restart.sh"
 alias s=". s.sh"
 alias sf=sf.sh

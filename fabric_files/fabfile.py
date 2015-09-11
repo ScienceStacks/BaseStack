@@ -154,6 +154,7 @@ def install_tools(**kwargs):
     npm install smash uglify-js slickgrid yui
     npm install uglifycss -g
     ln -s /usr/bin/nodejs /usr/bin/node
+    npm install -g node-qunit-phantomjs
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   
