@@ -1,6 +1,6 @@
 #! /bin/bash
-# Handles tar.zip and tar.bz2 files
-if ( echo $1 | grep -q ".tar.zip$" )
+# Handles tar.gz and tar.bz2 files
+if ( echo $1 | grep -q ".tar.gz$" )
 then
   tar -xvzf $1
 fi
