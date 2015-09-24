@@ -241,7 +241,7 @@ function! InsertJSLintControl()
   :execute cmd
   let cmd = ":0s/$/\r\\/*jslint unparam: true*\\//"
   :execute cmd
-  let cmd = ":0s/$/\r\\/*global alert, YAHOO *\\//"
+  let cmd = ":0s/$/\r\\/*global \$, alert, YAHOO *\\//"
   :execute cmd
   let cmd = ":0s/$/\r\\/*jshint onevar: false *\\//"
   :execute cmd
@@ -252,6 +252,10 @@ function! InsertJSLintControl()
   let cmd = ":0s/$/\r\\/*jshint jquery: true *\\//"
   :execute cmd
   let cmd = ":0s/$/\r\\/*jshint qunit: true *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint todo: true *\\//"
+  :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint onevar: true *\\//"
   :execute cmd
   let cmd = ":0d"
   :execute cmd
