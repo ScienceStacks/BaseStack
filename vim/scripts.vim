@@ -257,6 +257,8 @@ function! InsertJSLintControl()
   :execute cmd
   let cmd = ":0s/$/\r\\/*jshint onevar: true *\\//"
   :execute cmd
+  let cmd = ":0s/$/\r\\/*jshint newcap: true *\\//"
+  :execute cmd
   let cmd = ":0d"
   :execute cmd
 endfunction
