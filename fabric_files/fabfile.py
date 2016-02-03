@@ -157,11 +157,3 @@ def install_tools(**kwargs):
     npm install -g node-qunit-phantomjs
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
-  commands = '''
-    wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
-    bash Miniconda-latest-Linux-x86_64.sh
-    rm Miniconda-latest-Linux-x86_64.sh
-  '''
-  runall(commands.split('\n'), isSudo=True, **kwargs)
-  
-    
