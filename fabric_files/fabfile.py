@@ -70,7 +70,7 @@ def setup_django(engine=DEFAULT_ENGINE,
                  print_only=False,
                  **kwargs):
   apt_get("sqlite", isSudo=True, print_only=print_only, **kwargs)
-  runall(["pip install django"], isSudo=True, 
+  runall(["pip install django"], isSudo=False, 
       print_only=print_only, **kwargs)
   # Modify settings to select the engine and name
   # Modify the settings file
@@ -155,6 +155,12 @@ def install_tools(**kwargs):
     npm install uglifycss -g
     ln -s /usr/bin/nodejs /usr/bin/node
     npm install -g node-qunit-phantomjs
+  '''
+  runall(commands.split('\n'), isSudo=True, **kwargs)
+  commands = '''
+    wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+    bash Miniconda-latest-Linux-x86_64.sh
+    rm Miniconda-latest-Linux-x86_64.sh
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   
