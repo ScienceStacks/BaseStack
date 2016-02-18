@@ -16,6 +16,20 @@ function! AddPeriodToDocString ()
   s/$/./
 endfunction
 
+" Change a single line comment into a docstring
+function! ChangeCommentToDocstring ()
+  let cmd = ":.,.s/# //"
+  :execute cmd
+  let cur_pos = getpos(".")
+  let first = string(cur_pos[1]-1)
+  let second = string(cur_pos[1]+1)
+  let base_cmd = "s/$/\r    \"\"\"/"
+  let cmd = ":" . first . base_cmd
+  :execute cmd
+  let cmd = ":" . second . base_cmd
+  :execute cmd
+endfunction
+
 " Creates a block for debugging by catching an exception
 function! CreateDebugBlock ()
   let cur_pos = getpos(".")
@@ -318,7 +332,7 @@ endfunction
 nmap ,a :call AssignPyVariable ()<CR>
 nmap ,b :call CommentLines ()<CR>
 nmap ,c :call CopyLinesToBuffer ()<CR>
-nmap ,d :call DeleteLines ()<CR>
+nmap ,d :call ChangeCommentToDocstring ()<CR>
 nmap ,e :call SetEnvironment()<CR>
 nmap ,f :call UnCommentLines ()<CR>
 nmap ,g :call ChangeP4Password ()<CR>
