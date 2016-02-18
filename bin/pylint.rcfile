@@ -38,7 +38,7 @@ load-plugins=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-#disable=
+disable=W0403
 
 
 [REPORTS]
@@ -96,7 +96,7 @@ ignore-imports=no
 [VARIABLES]
 
 # Tells whether we should check for unused import in __init__ files.
-init-import=no
+init-import=yes
 
 # A regular expression matching the beginning of the name of dummy variables
 # (i.e. not used).
