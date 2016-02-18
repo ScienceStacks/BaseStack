@@ -134,6 +134,7 @@ def install_chef(**kwargs):
 
 def install_tools(**kwargs):
   apt_get("python-pip python-dev build-essential", isSudo=True, **kwargs)
+  apt_get("pylint", isSudo=True, **kwargs)
   commands = '''
     pip install --upgrade pip 
     pip install --upgrade virtualenv 
