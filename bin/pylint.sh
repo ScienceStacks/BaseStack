@@ -29,7 +29,8 @@ for ff in $FILES; do
         | grep -v 'Unable to import'
   fi
 done
-
+ 
 if [ $OK -eq "0" ]
 then
   echo "No errors found."
+fi
