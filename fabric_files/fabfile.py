@@ -140,7 +140,11 @@ def install_tools(**kwargs):
     pip install --upgrade virtualenv 
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
-  runall(["pip install numpy"], isSudo=True, **kwargs)
+  commands = '''
+    pip install numpy
+    pip install bokeh
+  '''
+  runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
   # Install jslint

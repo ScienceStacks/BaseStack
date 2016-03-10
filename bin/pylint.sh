@@ -17,6 +17,7 @@ for ff in $FILES; do
         | grep ":*,"  \
         | grep -v 'Your code has been rated' \
         | grep -v 'Unable to import' \
+        | grep -v 'Locally disabling' \
         | wc | awk '{print $1}'`
   if [ $NO_LINES -ne "0" ]
   then
@@ -26,6 +27,7 @@ for ff in $FILES; do
     pylint --rcfile $HOME/BaseStack/bin/pylint.rcfile $ff \
         | grep ","  \
         | grep -v 'Your code has been rated' \
+        | grep -v 'Locally disabling' \
         | grep -v 'Unable to import'
   fi
 done
