@@ -143,7 +143,8 @@ def install_tools(**kwargs):
   commands = '''
     pip install numpy
     pip install bokeh
-    pip install openpyxl
+    pip install xlrd
+    pip install xlsxwriter
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
