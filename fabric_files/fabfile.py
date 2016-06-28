@@ -142,25 +142,28 @@ def install_tools(**kwargs):
   runall(commands.split('\n'), isSudo=True, **kwargs)
   commands = '''
     pip install numpy
+  '''
+  runall(commands.split('\n'), isSudo=True, **kwargs)
+  commands = '''
     pip install bokeh
     pip install xlrd
     pip install openpyxl
   '''
-  runall(commands.split('\n'), isSudo=True, **kwargs)
+  runall(commands.split('\n'), isSudo=False, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
   # Install jslint
   apt_get("nodejs npm", isSudo=True, **kwargs)
   commands = '''
     cd /usr/share;
-    mkdir jslint;
+    rm -fR jslint;
     npm install jslint;
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   commands = '''
     npm install smash uglify-js slickgrid yui
     npm install uglifycss -g
-    ln -s /usr/bin/nodejs /usr/bin/node
+    ln -sf /usr/bin/nodejs /usr/bin/node
     npm install -g node-qunit-phantomjs
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
