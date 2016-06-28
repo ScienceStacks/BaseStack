@@ -142,14 +142,11 @@ def install_tools(**kwargs):
   runall(commands.split('\n'), isSudo=True, **kwargs)
   commands = '''
     pip install numpy
-  '''
-  runall(commands.split('\n'), isSudo=True, **kwargs)
-  commands = '''
     pip install bokeh
     pip install xlrd
     pip install openpyxl
   '''
-  runall(commands.split('\n'), isSudo=False, **kwargs)
+  runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
   # Install jslint
