@@ -21,5 +21,6 @@ apt_get git
 git clone https://github.com/ScienceStacks/BaseStack.git
 cd $HOME/BaseStack
 git config credential.helper store  # Avoid repeated entry of creds
+git config --global push.default simple
 bash setup.sh
 echo "Success!"
