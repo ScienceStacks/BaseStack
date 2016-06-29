@@ -150,6 +150,7 @@ def install_tools(**kwargs):
     pip install bokeh
     pip install xlrd
     pip install openpyxl
+    pip install pandas
     pip install ipython[all]
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
