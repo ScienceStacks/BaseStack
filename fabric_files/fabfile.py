@@ -133,6 +133,11 @@ def install_chef(**kwargs):
       runall([command], isSudo=False, **kwargs)
 
 def install_tools(**kwargs):
+  from_path = "%s/aux_files/sources.list" % REPO_PATH
+  to_path = "/etc/apt"
+  cp(from_path, to_path, options="f", isSudo=True, **kwargs)
+  commands = "apt-get update"
+  runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("python-pip python-dev build-essential", isSudo=True, **kwargs)
   apt_get("pylint", isSudo=True, **kwargs)
   commands = '''
@@ -145,6 +150,7 @@ def install_tools(**kwargs):
     pip install bokeh
     pip install xlrd
     pip install openpyxl
+    pip install ipython[all]
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
