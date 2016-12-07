@@ -171,3 +171,9 @@ def install_tools(**kwargs):
     npm install -g node-qunit-phantomjs
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
+    commands = '''
+       cd $HOME/Downloads
+       wget http:
+       dpkg -i code_*
+    '''
+    runall(commands.split('\n'), IsSudo=True, **kwargs)
