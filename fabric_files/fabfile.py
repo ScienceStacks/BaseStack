@@ -18,6 +18,7 @@ SITE_NAME = "mysite"
 SITE_DIR = "%s/aux_files/%s" % (REPO_PATH, SITE_NAME)
 APP_DIR = "%s/%s" % (SITE_DIR, SITE_NAME)
 CONF_PATH = "%s/aux_files/000-default.conf" % REPO_PATH
+PYLINT_CONF_PATH = "%s/aux_files/.pylintrc" % REPO_PATH
 SUDO_PW = "ubuntu"
 GIT_EMAIL = "jlheller@uw.edu"
 GIT_USERNAME = "Joseph Hellerstein"
@@ -133,6 +134,7 @@ def install_chef(**kwargs):
       runall([command], isSudo=False, **kwargs)
 
 def install_tools(**kwargs):
+  # Apache files
   from_path = "%s/aux_files/sources.list" % REPO_PATH
   to_path = "/etc/apt"
   cp(from_path, to_path, options="f", isSudo=True, **kwargs)
@@ -171,3 +173,7 @@ def install_tools(**kwargs):
     npm install -g node-qunit-phantomjs
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
+  # Copy pylint configuration model
+  from_path = PYLINT_CONF_PATH
+  to_path = "$HOME"
+  cp(from_path, to_path, options="f", isSudo=False, **kwargs)
