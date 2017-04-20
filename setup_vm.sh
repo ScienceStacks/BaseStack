@@ -23,5 +23,6 @@ cd $HOME/BaseStack
 git config credential.helper store  # Avoid repeated entry of creds
 git config --global push.default simple
 git config --global core.editor "vim"
+git config --global color.ui "auto"
 bash setup.sh
 echo "Success!"
