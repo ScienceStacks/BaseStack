@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# In case there is a problem with apt-get (e.g., "must have source URI"),
+# can regenerate sources.list using https://repogen.simplylinux.ch/.
+# The file is in /etc/apt.
 
 function apt_get {
 # Arg 1: package
@@ -18,5 +21,8 @@ apt_get git
 git clone https://github.com/ScienceStacks/BaseStack.git
 cd $HOME/BaseStack
 git config credential.helper store  # Avoid repeated entry of creds
+git config --global push.default simple
+git config --global core.editor "vim"
+git config --global color.ui "auto"
 bash setup.sh
 echo "Success!"

@@ -355,3 +355,5 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set statusline=%t\ %y\ format:\ %{&ff};\ [%c,%l]
 :set laststatus=2
 :set nu
+:highlight LineNr ctermfg=grey
+:colorscheme elflord

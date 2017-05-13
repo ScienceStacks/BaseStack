@@ -18,6 +18,7 @@ SITE_NAME = "mysite"
 SITE_DIR = "%s/aux_files/%s" % (REPO_PATH, SITE_NAME)
 APP_DIR = "%s/%s" % (SITE_DIR, SITE_NAME)
 CONF_PATH = "%s/aux_files/000-default.conf" % REPO_PATH
+PYLINT_CONF_PATH = "%s/aux_files/.pylintrc" % REPO_PATH
 SUDO_PW = "ubuntu"
 GIT_EMAIL = "jlheller@uw.edu"
 GIT_USERNAME = "Joseph Hellerstein"
@@ -133,6 +134,12 @@ def install_chef(**kwargs):
       runall([command], isSudo=False, **kwargs)
 
 def install_tools(**kwargs):
+  # Apache files
+  from_path = "%s/aux_files/sources.list" % REPO_PATH
+  to_path = "/etc/apt"
+  cp(from_path, to_path, options="f", isSudo=True, **kwargs)
+  commands = "apt-get update"
+  runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("python-pip python-dev build-essential", isSudo=True, **kwargs)
   apt_get("pylint", isSudo=True, **kwargs)
   commands = '''
@@ -140,21 +147,33 @@ def install_tools(**kwargs):
     pip install --upgrade virtualenv 
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
-  runall(["pip install numpy"], isSudo=True, **kwargs)
+  commands = '''
+    pip install numpy
+    pip install bokeh
+    pip install xlrd
+    pip install openpyxl
+    pip install pandas
+    pip install ipython[all]
+  '''
+  runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("curl", isSudo=True, **kwargs)
   apt_get("vim", isSudo=True, **kwargs)
   # Install jslint
   apt_get("nodejs npm", isSudo=True, **kwargs)
   commands = '''
     cd /usr/share;
-    mkdir jslint;
+    rm -fR jslint;
     npm install jslint;
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
   commands = '''
     npm install smash uglify-js slickgrid yui
     npm install uglifycss -g
-    ln -s /usr/bin/nodejs /usr/bin/node
+    ln -sf /usr/bin/nodejs /usr/bin/node
     npm install -g node-qunit-phantomjs
   '''
   runall(commands.split('\n'), isSudo=True, **kwargs)
+  # Copy pylint configuration model
+  from_path = PYLINT_CONF_PATH
+  to_path = "$HOME"
+  cp(from_path, to_path, options="f", isSudo=False, **kwargs)
