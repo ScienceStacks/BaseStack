@@ -355,3 +355,5 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set statusline=%t\ %y\ format:\ %{&ff};\ [%c,%l]
 :set laststatus=2
 :set nu
+set spelllang=en
+set spellfile=$HOME/BaseStack/vim/spell/en.utf-8.add
