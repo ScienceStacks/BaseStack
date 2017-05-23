@@ -16,4 +16,5 @@ apt_get ssh
 
 cd $HOME/BaseStack/fabric_files
 fab setup
+cd $HOME/BaseStack
 bash setup_miniconda.sh

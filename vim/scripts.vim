@@ -357,3 +357,5 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set nu
 set spelllang=en
 set spellfile=$HOME/BaseStack/vim/spell/en.utf-8.add
+:highlight LineNr ctermfg=grey
+:colorscheme elflord
