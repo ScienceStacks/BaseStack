@@ -114,3 +114,4 @@ if ! shopt -oq posix; then
 fi
 PATH=:.:$HOME/BaseStack/bin:$PATH
 source alias.sh
+PYTHONPATH="/usr/local/lib/python2.7/dist-packages"
