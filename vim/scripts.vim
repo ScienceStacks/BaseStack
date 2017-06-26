@@ -359,4 +359,3 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :colorscheme industry
 set spelllang=en
 set spellfile=$HOME/BaseStack/vim/spell/en.utf-8.add
->>>>>>> 5e71aceaf925e63934393eef28fda6a63003dd48
