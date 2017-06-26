@@ -356,4 +356,4 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set laststatus=2
 :set nu
 :highlight LineNr ctermfg=grey
-:colorscheme elflord
+:colorscheme industry
