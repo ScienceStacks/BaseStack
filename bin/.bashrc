@@ -114,3 +114,5 @@ if ! shopt -oq posix; then
 fi
 PATH=:.:$HOME/BaseStack/bin:$PATH
 source alias.sh
+# The following is required to get Django
+export PYTHONPATH="${PYTHONPATH}:/usr/local/lib/python2.7/dist-packages"
