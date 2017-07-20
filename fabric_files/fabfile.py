@@ -142,6 +142,7 @@ def install_tools(**kwargs):
   runall(commands.split('\n'), isSudo=True, **kwargs)
   apt_get("python-pip python-dev build-essential", isSudo=True, **kwargs)
   apt_get("pylint", isSudo=True, **kwargs)
+  apt_get("python-coverage", isSudo=True, **kwargs)
   commands = '''
     pip install --upgrade pip 
     pip install --upgrade virtualenv 
