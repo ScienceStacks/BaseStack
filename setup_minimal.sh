@@ -13,8 +13,9 @@ function setup_conda {
 }
 
 #
-setup_conda 2
 setup_conda 3
+#
+sudo apt install python-setuptools
 #
 sudo apt-get install vim
 cp vim/scripts.vim $HOME/.vimrc
