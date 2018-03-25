@@ -10,6 +10,7 @@ function setup_conda {
   $HOME/miniconda${PY}/bin/conda update -n base conda
   $HOME/miniconda${PY}/bin/conda install numpy
   $HOME/miniconda${PY}/bin/conda install pandas
+  $HOME/miniconda${PY}/bin/conda install matplotlib
   $HOME/miniconda${PY}/bin/conda install jupyter notebook
 }
 # Put shell scripts in path
