@@ -12,6 +12,7 @@ function setup_conda {
   $HOME/miniconda${PY}/bin/conda install pandas
   $HOME/miniconda${PY}/bin/conda install matplotlib
   $HOME/miniconda${PY}/bin/conda install jupyter notebook
+  $HOME/miniconda${PY}/bin/conda install -c auto python-dash
 }
 # Put shell scripts in path
 cp bin/.bashrc $HOME
