@@ -3,15 +3,20 @@
 function setup_conda {
 # Arg 1: python level either 2 or 3
   PY=$1
+  CONDA=$HOME/miniconda${PY}/bin/conda
   rm -rf $HOME/miniconda${PY}
   wget https://repo.continuum.io/miniconda/Miniconda${PY}-latest-Linux-x86_64.sh
   bash Miniconda${PY}-latest-Linux-x86_64.sh
   rm Miniconda${PY}-latest-Linux-x86_64.sh
-  $HOME/miniconda${PY}/bin/conda update -n base conda
-  $HOME/miniconda${PY}/bin/conda install numpy
-  $HOME/miniconda${PY}/bin/conda install pandas
-  $HOME/miniconda${PY}/bin/conda install matplotlib
-  $HOME/miniconda${PY}/bin/conda install jupyter notebook
+  
+  $CONDA update -n base conda
+  $CONDA install python=3.6.4  # Latest release for Tellurium
+  $CONDA install numpy
+  $CONDA install pandas
+  $CONDA install matplotlib
+  $CONDA install jupyter notebook
+  $CONDA install scikit-learn
+  pip install tellurium
 }
 # Put shell scripts in path
 cp bin/.bashrc $HOME
