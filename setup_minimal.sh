@@ -16,7 +16,7 @@ function setup_conda {
   $CONDA install matplotlib
   $CONDA install jupyter notebook
   $CONDA install scikit-learn
-  pip install tellurium
+  $HOME/miniconda${PY}/bin/pip install tellurium
 }
 # Put shell scripts in path
 cp bin/.bashrc $HOME
