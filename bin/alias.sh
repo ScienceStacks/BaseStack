@@ -4,6 +4,7 @@ alias ff="ff.sh"
 alias ft="ft.sh"
 alias g=". g.sh"
 alias gs="git_status.sh"
+alias la="launch_terminals.sh"
 alias ll="ls -l"
 alias lx=lx.sh
 alias q="qunit.sh"
