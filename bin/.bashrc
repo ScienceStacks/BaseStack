@@ -116,3 +116,4 @@ PATH=:.:$HOME/BaseStack/bin:$PATH
 source alias.sh
 # The following is required to get Django
 export LD_LIBRARY_PATH=/home/ubuntu/miniconda3/lib:$LD_LIBRARY_PATH
+PYTHONPATH=""
