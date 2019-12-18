@@ -317,6 +317,59 @@ function! UnCommentLines()
   call setpos(".", cur_pos)
 endfunction
 
+" Utility to set IGNORE_TEST to a value
+function SetTestIgnore (boolean)
+  let cur_pos = getpos('.')
+  let cmd = "/IGNORE_TEST =/,/IGNORE_TEST =/s/^.*$/IGNORE_TEST = " . a:boolean . "/"
+  :execute cmd
+  call setpos(".", cur_pos)
+endfunction
+
+" Sets a unittest to only run one unit test  
+" Usage: position cursor on if IGNORE_TEST: for
+" the unit test to run exclusively.
+function! SetUnitTest ()
+  let cur_line = getline('.')
+  " Check that add a valid position
+  let splits = split(cur_line)
+  if (len(splits) < 2)
+    echo '**Position cursor on if IGNORE_TEST:'
+    return
+  endif
+  if (splits[1] != 'IGNORE_TEST:')
+    echo '**Position cursor on if IGNORE_TEST:'
+    return
+  endif
+  " Remove 'if IGNORE_TEST:'
+  let cur_pos = getpos('.')
+  let cmd = ".,.+1d" 
+  :execute cmd
+  :execute ":.-1"
+  let cmd = ":s/$/\r    # TESTING/"
+  :execute cmd
+  " Restore position
+  call setpos(".", cur_pos)
+  " Set the mode to ignore tests
+  call SetTestIgnore ("True")
+endfunction
+
+" Unsets a unittest to only run one unit test  
+" Usage: run anywhere
+" the unit test to run exclusively.
+function! UnsetUnitTest ()
+  let cur_pos = getpos('.')
+  " Restore 'if IGNORE_TEST:
+  let cmd = "/# TESTING"
+  :execute cmd
+  let cmd = "s/^.*$/    if IGNORE_TEST:/"
+  :execute cmd
+  let cmd = "s/$/\r      return/"
+  :execute cmd
+  call setpos(".", cur_pos)
+  " Set the mode to ignore tests
+  call SetTestIgnore ("False")
+endfunction
+
 " Add ignore for pylint
 function PylintIgnore()
     s/$/  # pylint:disable-msg=C6409/
@@ -344,6 +397,8 @@ nmap ,q :call ChangeDoubleQuoteToSingleQuote ()<CR>
 nmap ,r :call ReadFromTmpBufferx ()<CR>
 nmap ,s :call SwapDoubleQuoteForSingleQuote () <CR>
 nmap ,t :call FormatLogLines ()<CR>
+nmap ,tt :call SetUnitTest ()<CR>
+nmap ,tu :call UnsetUnitTest ()<CR>
 nmap ,u :call UnindentPyLines () <CR>
 nmap ,x :call CutLines () <CR>
 
