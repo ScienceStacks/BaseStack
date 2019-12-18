@@ -28,5 +28,9 @@ sudo apt install python-setuptools
 #
 sudo apt-get install vim
 cp vim/scripts.vim $HOME/.vimrc
+# Git initialization
+git config --global user.email "jlheller@uw.edu"
+git config --global user.name "Joseph Hellerstein"
+git_credentials.sh
 #
 echo "Done!"
