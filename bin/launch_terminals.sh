@@ -3,7 +3,7 @@
 #   <n> is 4 or 6; default is 4
 
 WINDOWS=4
-if [ $1 == "-x" ]
+if [ $1 == "-w" ]
 then
   WINDOWS=$2
 fi
