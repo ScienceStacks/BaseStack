@@ -135,10 +135,4 @@ conda config --set changeps1 True
 #    fi
 #fi
 #unset __conda_setup
-# <<< conda initialize <<<
-<<<<<<< HEAD
-
-conda activate whaletracks
-=======
 conda activate base
->>>>>>> 29a064cab3e87c0373894039bbd8dee8e59d8360
