@@ -12,3 +12,5 @@ a clean VM.
 
 2.  In a terminal session, enter: "bash setup_vm.sh".
 You will have to enter "y" multiple times, and possibly the root password.
+
+3. In Ubuntu 18, it was necessary to update the Ubuntu network configuration by adding the file /etc/NetworkManager/conf.d/10-globally-managed-devices.conf

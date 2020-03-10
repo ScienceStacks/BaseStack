@@ -112,14 +112,14 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-PATH=:.:$HOME/BaseStack/bin:$PATH
+PATH=:.:$HOME/BaseStack/bin:$HOME/miniconda3/bin:$PATH
 source alias.sh
 # The following is required to get Django
 export LD_LIBRARY_PATH=/home/ubuntu/miniconda3/lib:$LD_LIBRARY_PATH
 PYTHONPATH=""
 
 # Initialize conda
-. "/home/ubuntu/miniconda3/etc/profile.d/conda.sh"
+. /home/ubuntu/miniconda3/etc/profile.d/conda.sh
 conda config --set changeps1 True
 
 ## >>> conda initialize >>>

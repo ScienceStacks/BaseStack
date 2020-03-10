@@ -32,5 +32,7 @@ cp vim/scripts.vim $HOME/.vimrc
 git config --global user.email "jlheller@uw.edu"
 git config --global user.name "Joseph Hellerstein"
 git_credentials.sh
+# Modify the network configuration to ensure network access
+sudo cp aux_files/10-globally-managed-devices.conf /etc/NetworkManager/conf.d
 #
 echo "Done!"
