@@ -21,6 +21,9 @@ function setup_conda {
 # Put shell scripts in path
 cp bin/.bashrc $HOME
 
+# Install kite command completion
+bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"
+
 #
 setup_conda 3
 #
