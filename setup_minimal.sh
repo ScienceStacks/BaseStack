@@ -17,6 +17,9 @@ function setup_conda {
   $CONDA install jupyter notebook
   $CONDA install scikit-learn
   $HOME/miniconda${PY}/bin/pip install tellurium
+  # Install spyder and intellisense
+  $HOME/miniconda${PY}/bin/pip install spyder
+  $HOME/miniconda${PY}/bin/pip install rope_py3k
 }
 # Put shell scripts in path
 cp bin/.bashrc $HOME
