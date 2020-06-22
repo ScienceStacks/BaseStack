@@ -322,6 +322,8 @@ function SetTestIgnore (boolean)
   let cur_pos = getpos('.')
   let cmd = "/IGNORE_TEST =/,/IGNORE_TEST =/s/^.*$/IGNORE_TEST = " . a:boolean . "/"
   :execute cmd
+  let cmd = "/IS_PLOT =/,/IS_PLOT =/s/^.*$/IS_PLOT = " . a:boolean . "/"
+  :execute cmd
   call setpos(".", cur_pos)
 endfunction
 
