@@ -413,6 +413,6 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set laststatus=2
 :set nu
 :highlight LineNr ctermfg=grey
-:colorscheme kalt
+:colorscheme zmrok
 set spelllang=en
 set spellfile=$HOME/BaseStack/vim/spell/en.utf-8.add
