@@ -21,3 +21,7 @@ You will have to enter "y" multiple times, and possibly the root password.
 3. pip install nose
 4. Created .bat files to Util: python.bat, pip.bat, nosetests.bat
 5. Created environment variable SCRIPTS that points to my pip install
+
+## Tools
+### Kite
+- ``bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"``
