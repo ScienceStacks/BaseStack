@@ -16,6 +16,24 @@ function! AddPeriodToDocString ()
   s/$/./
 endfunction
 
+" insert a comment line
+function! InsertIndentedLine(text)
+  let cmd = ':s/$/\r    ' . a:text . '/'
+  :execute cmd
+endfunction
+
+" insert a docstring
+function! InsertDocString()
+  call InsertIndentedLine('"""')
+  call InsertIndentedLine('')
+  call InsertIndentedLine('Parameters')
+  call InsertIndentedLine('----------')
+  call InsertIndentedLine('')
+  call InsertIndentedLine('Returns')
+  call InsertIndentedLine('-------')
+  call InsertIndentedLine('"""')
+endfunction
+
 " Change a single line comment into a docstring
 function! ChangeCommentToDocstring ()
   let cmd = ":.,.s/# //"
@@ -387,7 +405,7 @@ endfunction
 nmap ,a :call AssignPyVariable ()<CR>
 nmap ,b :call CommentLines ()<CR>
 nmap ,c :call CopyLinesToBuffer ()<CR>
-nmap ,d :call ChangeCommentToDocstring ()<CR>
+nmap ,d :call InsertDocString ()<CR>
 nmap ,e :call SetEnvironment()<CR>
 nmap ,f :call UnCommentLines ()<CR>
 nmap ,g :call ChangeP4Password ()<CR>
