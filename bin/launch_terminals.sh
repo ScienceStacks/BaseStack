@@ -16,9 +16,9 @@ then
   gnome-terminal --geometry 74x23+1000+500 --hide-menubar
 else
   gnome-terminal --geometry 62x29+0+0 --hide-menubar
-  gnome-terminal --geometry 62x29+645+0 --hide-menubar
+  gnome-terminal --geometry 84x29+645+0 --hide-menubar
   gnome-terminal --geometry 62x29+1290+0 --hide-menubar
   gnome-terminal --geometry 62x29+0+565 --hide-menubar
-  gnome-terminal --geometry 62x29+645+565 --hide-menubar
+  gnome-terminal --geometry 84x29+645+565 --hide-menubar
   gnome-terminal --geometry 62x29+1290+565 --hide-menubar
 fi
