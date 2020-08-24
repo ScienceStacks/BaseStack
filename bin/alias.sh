@@ -10,5 +10,5 @@ alias lx=lx.sh
 alias q="qunit.sh"
 alias ra="apache_restart.sh"
 alias s=". s.sh"
-alias se="source setup_env.sh"
 alias sf=sf.sh
+alias sr="source setup_run.sh"
