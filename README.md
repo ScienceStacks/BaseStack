@@ -25,3 +25,9 @@ You will have to enter "y" multiple times, and possibly the root password.
 ## Tools
 ### Kite
 - ``bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"``
+### PyCharm
+- [Tutorial](https://www.tutorialspoint.com/pycharm/pycharm_tutorial.pdf)
+- It's probably best to set up the virtual environment in advance. To get PyCharm to use an existing virtual environment:
+  - File > Settings > Project > Project interpreter
+  - Add local
+  - Select the interpreter in the local environment: my_venv/bin/pythonX.X
