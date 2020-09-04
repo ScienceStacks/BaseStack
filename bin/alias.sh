@@ -1,4 +1,5 @@
 alias a=". alias.sh"
+alias ac="source activate.sh"
 alias c="cat"
 alias ff="ff.sh"
 alias ft="ft.sh"
