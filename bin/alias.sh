@@ -1,6 +1,7 @@
 alias a=". alias.sh"
 alias ac="source activate.sh"
 alias c="cat"
+alias de="deactivate"
 alias ff="ff.sh"
 alias ft="ft.sh"
 alias g=". g.sh"
