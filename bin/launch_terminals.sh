@@ -6,8 +6,8 @@ if [ $1 == "-w" ]
 then
   WINDOWS=$2
 fi
-WINDOWS=4
 WINDOWS=6
+WINDOWS=4
 
 if [ $WINDOWS == "4" ]
 then
