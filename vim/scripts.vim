@@ -456,6 +456,6 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set nu
 :highlight LineNr ctermfg=grey
 :colorscheme jiks
-:colorscheme jiks
+:colorscheme kiss
 set spelllang=en
 set spellfile=$HOME/BaseStack/vim/spell/en.utf-8.add

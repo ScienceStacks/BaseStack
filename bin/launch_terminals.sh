@@ -7,7 +7,6 @@ then
   WINDOWS=$2
 fi
 WINDOWS=4
-WINDOWS=6
 
 if [ $WINDOWS == "4" ]
 then

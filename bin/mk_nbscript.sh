@@ -1,7 +1,7 @@
 #!/bin/bash
 # Converts and an ipython notebook to a script
 # Notes: (1) File should not contain spaces
-FILE="nb_script"
+FILE="$1"
 cp "$1.ipynb" ${FILE}.ipynb
 NOTEBOOK="${FILE}.ipynb"
 PYTHON="${FILE}.py"
