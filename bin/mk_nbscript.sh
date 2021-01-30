@@ -2,7 +2,7 @@
 # Converts and an ipython notebook to a script
 # Notes: (1) File should not contain spaces
 FILE="$1"
-cp "$1.ipynb" ${FILE}.ipynb
+#cp "$1.ipynb" ${FILE}.ipynb
 NOTEBOOK="${FILE}.ipynb"
 PYTHON="${FILE}.py"
 TMP1="/tmp/run_nb1.py"
