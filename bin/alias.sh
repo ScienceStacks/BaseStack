@@ -15,4 +15,4 @@ alias ra="apache_restart.sh"
 alias s=". s.sh"
 alias sf=sf.sh
 alias sr="source setup_run.sh"
-alias su="source setup_virtual.sh"
+alias sv="source setup_virtual.sh"
