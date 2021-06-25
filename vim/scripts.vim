@@ -16,6 +16,26 @@ function! AddPeriodToDocString ()
   s/$/./
 endfunction
 
+" insert a comment line
+function! InsertIndentedLine(text)
+  let indent = GetIndentString()
+  let indents = indent . indent
+  let cmd = ':s/$/\r' . indents . a:text . '/'
+  :execute cmd
+endfunction
+
+" insert a docstring
+function! InsertDocString()
+  call InsertIndentedLine('"""')
+  call InsertIndentedLine('')
+  call InsertIndentedLine('Parameters')
+  call InsertIndentedLine('----------')
+  call InsertIndentedLine('')
+  call InsertIndentedLine('Returns')
+  call InsertIndentedLine('-------')
+  call InsertIndentedLine('"""')
+endfunction
+
 " Change a single line comment into a docstring
 function! ChangeCommentToDocstring ()
   let cmd = ":.,.s/# //"
@@ -35,10 +55,11 @@ function! CreateDebugBlock ()
   let cur_pos = getpos(".")
   let end_line = string(cur_pos[1])
   let start_line = input("Start line?")
+  let indent = GetIndentString()
 " Indent
-  let cmd = ":" . start_line . "," . end_line . "s/^/  /"
+  let cmd = ":" . start_line . "," . end_line . "s/^/" . "/"
 " add try
-  let cmd = ":" . start_line . "s/$/\r  try:/"
+  let cmd = ":" . start_line . "s/$/\r" . indent . "try:/"
   :execute cmd
   let cmd = ":s/$/\r except BaseException as e:/"
   :execute cmd
@@ -66,12 +87,18 @@ function! UnindentPyLines ()
   let cur_pos = getpos(".")
   let end_line = string(cur_pos[1])
   let start_line = input("Start line?")
+  let indent = GetIndentString()
   if len(start_line) == 0
     let start_line = end_line
   endif
-  let cmd = ":" . start_line . "," . end_line . "s/^  //"
+  let cmd = ":" . start_line . "," . end_line . "s/^" . indent .  "//"
   :execute cmd
   call setpos(".", cur_pos)
+endfunction
+
+" Indent Python lines
+function! GetIndentString ()
+  return "    "
 endfunction
 
 " Indent Python lines
@@ -79,10 +106,11 @@ function! IndentPyLines ()
   let cur_pos = getpos(".")
   let end_line = string(cur_pos[1])
   let start_line = input("Start line?")
+  let indent = GetIndentString()
   if len(start_line) == 0
     let start_line = end_line
   endif
-  let cmd = ":" . start_line . "," . end_line . "s/^/  /"
+  let cmd = ":" . start_line . "," . end_line . "s/^/" . indent .  "/"
   :execute cmd
   call setpos(".", cur_pos)
 endfunction
@@ -152,9 +180,12 @@ endfunction
 " Constructor assignment
 " Intended to be used by copying lines from the argument list of the def
 function! BuildPythonConstructorAssignmentLine ()
+  let indent = GetIndentString()
+  let indents = indent . indent
   :.,.s/ //g
   :.,.s/,$//
-  :.,.s/^.*$/    self.& = &/
+  let cmd = ":.,.s/^.*$/" . indents . "self.& = &/"
+  :execute cmd
 endfunction
 
 " Make a local variable private
@@ -279,8 +310,9 @@ endfunction
 
 " insert Py debug
 function! InsertPyDebug()
-  let cmd = ":s/$/\r    import pdb; pdb.set_trace()/"
-  "  let cmd = ":s/$/\r    bogus_statement/"
+  let indent = GetIndentString()
+  let indents = indent . indent
+  let cmd = ":s/$/\r" . indents . "import pdb; pdb.set_trace()/"
   :execute cmd
 endfunction
 
@@ -322,7 +354,12 @@ function SetTestIgnore (boolean)
   let cur_pos = getpos('.')
   let cmd = "/IGNORE_TEST =/,/IGNORE_TEST =/s/^.*$/IGNORE_TEST = " . a:boolean . "/"
   :execute cmd
+  let target_line_num = search('IS_PLOT')
+  if !target_line_num
+    return
+  endif
   let cmd = "/IS_PLOT =/,/IS_PLOT =/s/^.*$/IS_PLOT = " . a:boolean . "/"
+
   :execute cmd
   call setpos(".", cur_pos)
 endfunction
@@ -345,9 +382,11 @@ function! SetUnitTest ()
   " Remove 'if IGNORE_TEST:'
   let cur_pos = getpos('.')
   let cmd = ".,.+1d" 
+  let indent = GetIndentString()
+  let indents = indent . indent
   :execute cmd
   :execute ":.-1"
-  let cmd = ":s/$/\r    # TESTING/"
+  let cmd = ":s/$/\r" . indents . "# TESTING/"
   :execute cmd
   " Restore position
   call setpos(".", cur_pos)
@@ -360,12 +399,15 @@ endfunction
 " the unit test to run exclusively.
 function! UnsetUnitTest ()
   let cur_pos = getpos('.')
+  let indent = GetIndentString()
+  let indent2 = indent . indent
+  let indent3 = indent . indent . indent
   " Restore 'if IGNORE_TEST:
   let cmd = "/# TESTING"
   :execute cmd
-  let cmd = "s/^.*$/    if IGNORE_TEST:/"
+  let cmd = "s/^.*$/" . indent2 . "if IGNORE_TEST:/"
   :execute cmd
-  let cmd = "s/$/\r      return/"
+  let cmd = "s/$/\r" . indent3 . "return/"
   :execute cmd
   call setpos(".", cur_pos)
   " Set the mode to ignore tests
@@ -387,7 +429,7 @@ endfunction
 nmap ,a :call AssignPyVariable ()<CR>
 nmap ,b :call CommentLines ()<CR>
 nmap ,c :call CopyLinesToBuffer ()<CR>
-nmap ,d :call ChangeCommentToDocstring ()<CR>
+nmap ,d :call InsertDocString ()<CR>
 nmap ,e :call SetEnvironment()<CR>
 nmap ,f :call UnCommentLines ()<CR>
 nmap ,g :call ChangeP4Password ()<CR>
@@ -413,6 +455,7 @@ nmap ,,dc :call CreateDebugBlock() <CR>
 :set laststatus=2
 :set nu
 :highlight LineNr ctermfg=grey
-:colorscheme koehler
+:colorscheme jiks
+:colorscheme kiss
 set spelllang=en
 set spellfile=$HOME/BaseStack/vim/spell/en.utf-8.add
