@@ -31,3 +31,8 @@ You will have to enter "y" multiple times, and possibly the root password.
   - File > Settings > Project > Project interpreter
   - Add local
   - Select the interpreter in the local environment: my_venv/bin/pythonX.X
+
+## Setup
+- Sometimes, the following is needed to get the correct version of python:
+  - ``pip insall virtualenv``
+  - ``virtualenv -p python3.6 <ENV>``
