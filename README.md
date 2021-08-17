@@ -1,4 +1,4 @@
-# BaseStack
+#  BaseStack
 This repo creates a basic software stack on a clean VM. The stack
 includes:
   vim, git, pip, curl, apache
