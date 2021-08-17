@@ -36,3 +36,7 @@ You will have to enter "y" multiple times, and possibly the root password.
 - Sometimes, the following is needed to get the correct version of python:
   - ``pip insall virtualenv``
   - ``virtualenv -p python3.6 <ENV>``
+
+# GitHub usage
+1. Personal Access Tokens
+   * Profile > Settings > Developer Settings > personal access tokens
