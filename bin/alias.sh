@@ -8,6 +8,7 @@ alias gs="git_status.sh"
 alias la="launch_terminals.sh -w 6"
 alias ll="ls -l"
 alias lx=lx.sh
+alias p="pw.sh"
 alias pc="pycharm.sh"
 alias q="qunit.sh"
 alias ra="apache_restart.sh"
