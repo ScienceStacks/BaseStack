@@ -41,5 +41,10 @@ git config --global user.name "Joseph Hellerstein"
 git_credentials.sh
 # Modify the network configuration to ensure network access
 sudo touch /etc/NetworkManager/conf.d
+# Setup access to clipboard
+sudo apt-get update -y
+sudo apt-get install -y xclip
+# Get xclip
+sudo apt-get install xclip
 #
 echo "Done!"

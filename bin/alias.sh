@@ -9,6 +9,7 @@ alias la="launch_terminals.sh -w 6"
 alias ll="ls -l"
 alias lx=lx.sh
 alias pc="pycharm.sh"
+alias pw="pw.sh"
 alias q="qunit.sh"
 alias ra="apache_restart.sh"
 alias s=". s.sh"
