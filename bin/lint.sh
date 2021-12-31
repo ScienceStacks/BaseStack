@@ -15,4 +15,5 @@
   grep -v "Too many branches" | \
   grep -v "Access to a protected member" | \
   grep -v "Missing function or method docstring" | \
+  grep -v "Bad indentation" | \
   grep -v "Catching too general exception Exception"
