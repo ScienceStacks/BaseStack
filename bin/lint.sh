@@ -16,4 +16,6 @@
   grep -v "Access to a protected member" | \
   grep -v "Missing function or method docstring" | \
   grep -v "Bad indentation" | \
+  grep -v "(wrong-import-position)" | \
+  grep -v "(useless-object-inheritance)" | \
   grep -v "Catching too general exception Exception"
