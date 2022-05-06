@@ -10,10 +10,10 @@ WINDOWS=4
 
 if [ $WINDOWS == "4" ]
 then
-  gnome-terminal --geometry 85x26+0+0 --hide-menubar
-  gnome-terminal --geometry 85x26+1000+0 --hide-menubar
-  gnome-terminal --geometry 85x26+0+540 --hide-menubar
-  gnome-terminal --geometry 85x26+1000+540 --hide-menubar
+  gnome-terminal --geometry 88x27+0+0 --hide-menubar
+  gnome-terminal --geometry 88x27+1000+0 --hide-menubar
+  gnome-terminal --geometry 88x27+0+540 --hide-menubar
+  gnome-terminal --geometry 88x27+1000+540 --hide-menubar
 else
   gnome-terminal --geometry 62x29+0+0 --hide-menubar
   gnome-terminal --geometry 84x29+645+0 --hide-menubar
