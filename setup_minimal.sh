@@ -52,14 +52,4 @@ sudo apt update
 sudo apt install build-essential
 sudo apt-get install manpages-dev:w
 sudo apt-get install gfortran
-# Install pip requirements
-sudo apt install libssl-dev
-sudo apt install libncurses5-dev
-sudo apt install libsqlite3-dev
-sudo apt install libreadline-dev
-sudo apt install libtk8.6
-sudo apt install libgdm-dev
-sudo apt install libdb4o-cil-dev
-sudo apt install libpcap-dev
-
 echo "Done!"
