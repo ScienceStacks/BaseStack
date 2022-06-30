@@ -47,4 +47,9 @@ sudo apt-get install -y xclip
 # Get xclip
 sudo apt-get install xclip
 #
+# Set up compilers
+sudo apt update
+sudo apt install build-essential
+sudo apt-get install manpages-dev:w
+sudo apt-get install gfortran
 echo "Done!"
