@@ -21,3 +21,22 @@ You will have to enter "y" multiple times, and possibly the root password.
 3. pip install nose
 4. Created .bat files to Util: python.bat, pip.bat, nosetests.bat
 5. Created environment variable SCRIPTS that points to my pip install
+
+## Tools
+### Kite
+- ``bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"``
+### PyCharm
+- [Tutorial](https://www.tutorialspoint.com/pycharm/pycharm_tutorial.pdf)
+- It's probably best to set up the virtual environment in advance. To get PyCharm to use an existing virtual environment:
+  - File > Settings > Project > Project interpreter
+  - Add local
+  - Select the interpreter in the local environment: my_venv/bin/pythonX.X
+
+## Setup
+- Sometimes, the following is needed to get the correct version of python:
+  - ``pip insall virtualenv``
+  - ``virtualenv -p python3.6 <ENV>``
+
+# GitHub usage
+1. Personal Access Tokens
+   * Profile > Settings > Developer Settings > personal access tokens

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# In case there is a problem with apt-get (e.g., "must have source URI"),
+# In  case there is a problem with apt-get (e.g., "must have source URI"),
 # can regenerate sources.list using https://repogen.simplylinux.ch/.
 # The file is in /etc/apt.
 

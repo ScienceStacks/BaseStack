@@ -34,11 +34,22 @@ sudo apt install python-setuptools
 #
 sudo apt-get install vim
 cp vim/scripts.vim $HOME/.vimrc
+cp -r vim/dot_vim $HOME/.vim
 # Git initialization
 git config --global user.email "jlheller@uw.edu"
 git config --global user.name "Joseph Hellerstein"
 git_credentials.sh
 # Modify the network configuration to ensure network access
 sudo touch /etc/NetworkManager/conf.d
+# Setup access to clipboard
+sudo apt-get update -y
+sudo apt-get install -y xclip
+# Get xclip
+sudo apt-get install xclip
 #
+# Set up compilers
+sudo apt update
+sudo apt install build-essential
+sudo apt-get install manpages-dev:w
+sudo apt-get install gfortran
 echo "Done!"

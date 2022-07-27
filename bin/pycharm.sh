@@ -1,3 +1,3 @@
 #!/bin/bash
-cd $HOME/BaseStack/pycharm-community-2016.1.4/bin
+cd $HOME/pycharm-community-2020.2.1/bin
 bash pycharm.sh
