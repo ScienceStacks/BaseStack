@@ -1,9 +1,11 @@
 #!/bin/bash
-# Setup paths to run codes
+deactivate
+# Generic setup paths to run codes
 FILE="`pwd`/common_python"
 #
 if test -d "$FILE"; then
-    PYTHONPATH=$FILE:$PYTHONPATH
+    PYTHONPATH=`pwd`:$FILE
+else
+    PYTHONPATH=`pwd`
 fi
-PYTHONPATH=`pwd`:$PYTHONPATH
 export PYTHONPATH

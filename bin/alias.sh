@@ -1,5 +1,4 @@
-alias a="source setup_run.sh"
-alias activate="source env/bin/activate"
+alias a="source activate.sh"
 alias ff="ff.sh"
 alias ft="ft.sh"
 alias g=". g.sh"
