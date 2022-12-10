@@ -1,0 +1,3 @@
+#!/bin/bash
+# Can install xterm from MacQuartz
+/usr/x11/bin/xterm $1 $2 $3 $4 $5 $6 $7 $8 $9
