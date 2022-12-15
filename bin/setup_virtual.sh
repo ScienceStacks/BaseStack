@@ -13,5 +13,10 @@ DIR=$1
 python3 -m venv ${DIR}
 source ${DIR}/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
+# Check if need to install requirements
+if [ -f "requirements.txt" ]; then
+    pip install -r requirements.txt
+else 
+    echo "***No requirements.txt found"
+fi
 deactivate

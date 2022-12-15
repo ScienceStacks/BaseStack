@@ -1,4 +1,5 @@
 alias a="source activate.sh"
+alias d="deactivate"
 alias ff="ff.sh"
 alias ft="ft.sh"
 alias g=". g.sh"
