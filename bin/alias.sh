@@ -6,6 +6,6 @@ alias g=". g.sh"
 alias ll="ls -l"
 alias lx=lx.sh
 alias p=p.sh
-alias r="pushd $HOME/home/Technical/repos"
+alias r="pushd ${REPOPATH}"
 alias s=". s.sh"
 alias sf=sf.sh
