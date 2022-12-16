@@ -9,11 +9,11 @@ then
     exit
 fi
 #
-echo "* Verifying the package name"
+echo "* Verifying the package name."
 pushd ..
 if [ -d ${PACKAGE} ]
 then
-    echo "* Found package"
+    echo "* Found package."
 else
     echo "*** Package not found!"
     exit
@@ -24,16 +24,16 @@ TESTDIR=testing_${PACKAGE}
 if [ -d ${TESTDIR} ]
 then
     rm -rf $TESTDIR
-    echo "* Deleting existing $TESTDIR"
+    echo "* Deleting existing $TESTDIR."
 fi
 #
-echo "* Creating the virtual environment"
+echo "* Creating the virtual environment."
 python3 -m venv ${TESTDIR}
 source ${TESTDIR}/bin/activate
 pip install --upgrade pip
-echo "* Doing installs"
+echo "* Doing installs."
 pip install ${PACKAGE}
 pip install nose
 #
-echo "*Testing the install"
+echo "* Testing the install."
 nosetests ${PACKAGE}/tests
