@@ -1,5 +1,5 @@
 alias a="source activate.sh"
-alias d="deactivate"
+alias d="deactivate; source ~/home/Technical/repos/dft/bin/activate"
 alias ff="ff.sh"
 alias ft="ft.sh"
 alias g=". g.sh"
