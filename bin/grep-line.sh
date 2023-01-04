@@ -14,4 +14,4 @@ if [ "x${START_MARKER}" = "x" ];
 fi
 PGMDIR=${REPOPATH}/BaseStack/python
 source ${PGMDIR}/base/bin/activate
-python ${PGMDIR}/src/grep_line.py $FILE -s ${START_MARKER} -e ${END_MARKER}
+python ${PGMDIR}/src/grep_line.py $FILE -s ${START_MARKER} -e ${END_MARKER}     | sed 's/^    //' | sed 's/pip instal.*$//'

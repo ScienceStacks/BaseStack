@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--start_marker', help="Marker to start collecting lines")      # Staring for starting marker
     parser.add_argument('-e', '--end_marker', help="Marker to stop collecting lines")      # Staring for ending marker
     args = parser.parse_args()
-    in_lines = [l.strip() for l in args.source_file.readlines()]
+    in_lines = args.source_file.readlines()
     out_lines = extract(in_lines, args.start_marker, args.end_marker)
     out_text = "\n".join(out_lines)
     sys.stdout.write(out_text)
