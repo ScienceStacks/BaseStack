@@ -99,9 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+echo "$HOME/home/Technical/repos" > /tmp/REPOPATH
 REPOPATH="/$HOME/home/Technical/repos"
 #PS1='%~$ '
 PATH="${REPOPATH}/BaseStack/bin:/usr/local/bin::/usr/bin:/bin:/usr/sbin:/sbin:${PATH}"
+PATH=${PATH}:$HOME/.cargo/bin
 export PATH
 source alias.sh
 # Enter a default python environment to protect the base environment

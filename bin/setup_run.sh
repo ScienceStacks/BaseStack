@@ -3,7 +3,7 @@
 deactivate
 # Generic setup paths to run codes
 FILE="`pwd`/common_python"
-PYTHONPATH=`pwd`
+PYTHONPATH=`pwd`:/opt/homebrew/Cellar
 #
 if test -d "$FILE"; then
     PYTHONPATH=$FILE:${PYTHONPATH}
