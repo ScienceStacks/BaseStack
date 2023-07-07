@@ -104,6 +104,7 @@ REPOPATH="/$HOME/home/Technical/repos"
 #PS1='%~$ '
 PATH="${REPOPATH}/BaseStack/bin:/usr/local/bin::/usr/bin:/bin:/usr/sbin:/sbin:${PATH}"
 PATH=${PATH}:$HOME/.cargo/bin
+PATH=${PATH}:/opt/homebrew/bin
 export PATH
 source alias.sh
 # Enter a default python environment to protect the base environment
