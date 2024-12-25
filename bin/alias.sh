@@ -1,4 +1,4 @@
-alias a="source activate.sh"
+alias  a="source activate.sh"
 alias c="bash check_dbg.sh"
 alias d="deactivate; source ~/home/Technical/repos/dft/bin/activate"
 alias ff="ff.sh"
