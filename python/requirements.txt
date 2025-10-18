@@ -1,0 +1,10 @@
+numpy
+jupyterlab
+matplotlib
+nose
+pandas
+pip>20
+pylint
+python-libsbml
+seaborn
+tellurium
